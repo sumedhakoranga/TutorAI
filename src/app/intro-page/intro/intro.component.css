@@ -1,0 +1,15 @@
+h3{
+  font-size: 34px;
+  color:blue;
+  text-decoration: underline;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  padding-top:2%;
+  /* padding-left:5%; */
+ }
+ p{
+  font-size:xx-large;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 500;
+  /* padding-left:2%; */
+ }

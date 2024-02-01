@@ -1,0 +1,16 @@
+/* img{
+  width: 440px;
+  height: 400px ;
+  display:block;
+  float: right;
+  padding-top:20%;
+ } */
+ h3{
+  padding-top:5%;
+  /* padding-left:5%; */
+ }
+ p{
+  font-size: larger;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  color:rgb(83, 83, 146);
+ }

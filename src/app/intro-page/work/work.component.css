@@ -1,0 +1,13 @@
+h1{
+  font-size: 40px;
+  font-weight: 400;
+  text-decoration: underline;
+  padding-top:10%;
+  /* padding-left: 6%; */
+}
+div{
+  margin-top:2%;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  /* padding-left: 5%; */
+  border-color: rgb(65, 65, 141);
+}
