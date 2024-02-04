@@ -13,7 +13,7 @@ export class AppComponent {
   constructor(private router: Router){
     this.router.events.subscribe((event:any)=>{
       if(event instanceof NavigationEnd){
-        this.showHeaderFooter = !(event.url ==='/login' ||event.url==='/signup' ||event.url==='/courses' ||event.url==='/progress');
+        this.showHeaderFooter = !(event.url === '/login' || event.url === '/signup' || event.url === '/courses' || event.url === '/progress' || event.url === '/profile' || event.url === '/teachers');
       }
     });
   }

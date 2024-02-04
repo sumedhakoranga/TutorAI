@@ -33,10 +33,11 @@ a:hover{
 }
 
 .panel{
-  max-height: calc(100%-70px);
+  max-height: 100%;
   box-shadow: 20px 20px 80px rgb(218,218,218);
   border-radius: 12px;
-  margin-top:10px;
+  margin-top:20%;
+  
 }
 
 .input-field{

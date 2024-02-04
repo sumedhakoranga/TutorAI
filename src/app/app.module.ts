@@ -15,6 +15,8 @@ import { SignupComponent } from './signup/signup.component';
 import { CoursesComponent } from './student/courses/courses.component';
 import { ProgressComponent } from './student/progress/progress.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { ProfileComponent } from './student/profile/profile.component';
+import { TeachersComponent } from './student/teachers/teachers.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     LoginComponent,
     SignupComponent,
     CoursesComponent,
-    ProgressComponent
+    ProgressComponent,
+    ProfileComponent,
+    TeachersComponent
   ],
   imports: [
     BrowserModule,

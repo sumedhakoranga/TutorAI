@@ -1,0 +1,10 @@
+select{
+  height: 40px;
+  width:90%;
+  border-radius:8px;
+  text-align: center;
+  margin: 10px;
+}
+.progress_component{
+  padding: 0% 0% 50% 0%;
+}
