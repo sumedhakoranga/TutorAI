@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-signup',
@@ -7,45 +8,68 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrl: './signup.component.css'
 })
 
-export class SignupComponent implements OnInit{
+export class SignupComponent implements OnInit {
   type: string = "password";
   isText: boolean = false;
-  eyeIcon:string = "fa-eye-slash";
-  signUpForm! : FormGroup;
-  constructor(private fb:FormBuilder){}
+  eyeIcon: string = "fa-eye-slash";
+  signUpForm!: FormGroup;
+  // constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private auth: AngularFireAuth) { }
 
-  ngOnInit():void {
+
+  ngOnInit(): void {
     this.signUpForm = this.fb.group({
-      firstname:['',Validators.required],
-      lastname:['', Validators.required],
-      username:['', Validators.required],
-      email:['', Validators.required],
-      password:['',Validators.required]
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      username: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     })
   }
 
-  hideShowPassword(){
+  hideShowPassword() {
     this.isText = !this.isText;
-    this.isText ? this.eyeIcon = "fa-eye" : this.eyeIcon="fa-eye-slash";
+    this.isText ? this.eyeIcon = "fa-eye" : this.eyeIcon = "fa-eye-slash";
     this.isText ? this.type = "text" : this.type = "password";
   }
 
-  onSignUp(){
-    if(this.signUpForm.valid){
-      console.log(this.signUpForm.value)
-    }else{
+  // onSignUp() {
+  //   if (this.signUpForm.valid) {
+  //     console.log(this.signUpForm.value)
+  //   } else {
+  //     this.validateALLFormFields(this.signUpForm);
+  //     alert("Your form is invalid")
+  //   }
+  // }
+
+
+
+  onSignUp() {
+    if (this.signUpForm.valid) {
+      const { email, password } = this.signUpForm.value;
+      this.auth.createUserWithEmailAndPassword(email, password)
+        .then(result => {
+          // Handle successful signup
+          console.log(result);
+        })
+        .catch(error => {
+          // Handle errors
+          console.error(error);
+        });
+    } else {
       this.validateALLFormFields(this.signUpForm);
-      alert("Your form is invalid")
+      alert("Your form is invalid");
     }
   }
 
-  private validateALLFormFields(formGroup:FormGroup){
-    Object.keys(formGroup.controls).forEach(field=>{
+
+  private validateALLFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if(control instanceof FormControl){
-        control.markAsDirty({onlySelf:true});
+      if (control instanceof FormControl) {
+        control.markAsDirty({ onlySelf: true });
       }
-      else if(control instanceof FormGroup){
+      else if (control instanceof FormGroup) {
         this.validateALLFormFields(control)
       }
     })

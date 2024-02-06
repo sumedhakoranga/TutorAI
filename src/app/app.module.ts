@@ -17,6 +17,9 @@ import { ProgressComponent } from './student/progress/progress.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ProfileComponent } from './student/profile/profile.component';
 import { TeachersComponent } from './student/teachers/teachers.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -33,10 +36,12 @@ import { TeachersComponent } from './student/teachers/teachers.component';
     CoursesComponent,
     ProgressComponent,
     ProfileComponent,
-    TeachersComponent
+    TeachersComponent,
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
