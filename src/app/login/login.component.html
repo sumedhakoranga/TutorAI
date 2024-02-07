@@ -32,9 +32,9 @@
           </div>
           <div class="mx-3 my-2 py-2 bordert">
             <div class="text-center py-3">
-              <a href="https://www.facebook.com" target="_blank" class="px-2"> <img src="https://1.img-dpreview.com/files/p/E~C0x0S3571x3571T1200x1200~articles/9215694845/Facebook_Hero.jpeg" alt="image"></a>
-              <a href="https://www.google.com" target="_blank" class="px-2"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtc4kYHzBys6r84G8N8AYBJJjL53OneV9315mG_5a04g&s" alt="image"></a>
-              <a href="https://www.github.com" target="_blank" class="px-2"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLsneuujTXfTkOczkvd2VQcXFMUhPQXdAcQoodQ1-z4w&s" alt="image"></a>
+              <a (click)="loginWithFacebook()" [class.disabled]="isLoggingIn" class="px-2"> <img src="https://1.img-dpreview.com/files/p/E~C0x0S3571x3571T1200x1200~articles/9215694845/Facebook_Hero.jpeg" alt="image"></a>
+              <a (click)="loginWithGoogle()" class="px-2"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtc4kYHzBys6r84G8N8AYBJJjL53OneV9315mG_5a04g&s" alt="image"></a>
+              <a (click)="loginWithGithub()" class="px-2"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLsneuujTXfTkOczkvd2VQcXFMUhPQXdAcQoodQ1-z4w&s" alt="image"></a>
             </div>
           </div>
         </div>
