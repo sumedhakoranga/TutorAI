@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   isText: boolean = false;
   eyeIcon: string = "fa-eye-slash";
   loginForm!: FormGroup;
-  constructor(private fb: FormBuilder, private afAuth: AngularFireAuth) { }
+  constructor(private fb: FormBuilder, private afAuth: AngularFireAuth, private router: Router) { }
 
 
   ngOnInit(): void {
@@ -35,14 +35,6 @@ export class LoginComponent implements OnInit {
     this.isText ? this.type = "text" : this.type = "password";
   }
 
-  onSubmit() {
-    if (this.loginForm.valid) {
-      console.log(this.loginForm.value)
-    } else {
-      this.validateAllFormFields(this.loginForm);
-      alert("Your form is invalid")
-    }
-  }
 
   private validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
@@ -63,7 +55,7 @@ export class LoginComponent implements OnInit {
     if (this.isLoggingIn) return;
     this.isLoggingIn = true; // Disable the login button
     this.afAuth.signInWithPopup(new FacebookAuthProvider()).then((result) => {
-      console.log(result);
+      this.router.navigate(['/main']);
     }).catch((error) => {
       // Handle error
       console.log(error);
@@ -76,7 +68,7 @@ export class LoginComponent implements OnInit {
     if (this.isLoggingIn) return;
     this.isLoggingIn = true; // Disable the login button
     this.afAuth.signInWithPopup(new GoogleAuthProvider()).then((result) => {
-      console.log(result);
+      this.router.navigate(['/main']);
     }).catch((error) => {
       // Handle error
       console.log(error);
@@ -89,7 +81,7 @@ export class LoginComponent implements OnInit {
     if (this.isLoggingIn) return;
     this.isLoggingIn = true; // Disable the login button
     this.afAuth.signInWithPopup(new GithubAuthProvider()).then((result) => {
-      console.log(result);
+      this.router.navigate(['/main']);
     }).catch((error) => {
       // Handle error
       console.log(error);
@@ -97,6 +89,54 @@ export class LoginComponent implements OnInit {
       this.isLoggingIn = false; // Re-enable the login button after popup is handled
     });
   }
+
+  // login
+  onSubmit() {
+    if (this.loginForm.valid) {
+      const { username, password } = this.loginForm.value;
+      // Assuming username is actually the user's email
+      this.afAuth.signInWithEmailAndPassword(username, password)
+        .then(result => {
+          // Handle successful login, e.g., redirect or update UI
+          console.log('Login successful', result);
+          this.router.navigate(['/courses']);
+        })
+        .catch(error => {
+          // Handle login error
+          console.error('Login error', error);
+          alert(error.message);
+        });
+    } else {
+      this.validateAllFormFields(this.loginForm);
+      alert("Your form is invalid");
+    }
+  }
+
+  //forgot password 
+
+  resetPassword(email: string) {
+    this.afAuth.sendPasswordResetEmail(email)
+      .then(() => {
+        // Success message
+        alert('Password reset email sent. Check your inbox.');
+      })
+      .catch((error) => {
+        // Error handling
+        console.error('Error sending password reset email:', error);
+        alert(error.message);
+      });
+  }
+
+  promptResetPassword() {
+    const email = prompt('Please enter your email address to reset your password:');
+    if (email) { // Check if email is not null
+      this.resetPassword(email);
+    } else {
+      alert('Email address is required.');
+    }
+  }
+
+
 
 }
 

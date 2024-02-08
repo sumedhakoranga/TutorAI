@@ -24,7 +24,7 @@
               </div>
               <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')" class="text-danger">*Password is required</small>
               <div class="form-inline fr mt-4">
-                <a id="forget" class="font-weight-bold">Forget Password?</a>
+                <a (click)="promptResetPassword()" id="forget" class="font-weight-bold">Forget Password?</a>
               </div>
               <button (click)="onSubmit()" [disabled]="loginForm.invalid" type="submit" class="btn btn-primary btn-block mt-4 w-100">Login</button>
               <div class="text-center pt-4 text-muted">Don't have an account?<a id="forget" routerLink="/signup">Sign Up</a></div>

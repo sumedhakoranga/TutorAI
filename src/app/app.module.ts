@@ -23,6 +23,7 @@ import { GoogleAuthProvider } from "firebase/auth";
 import { FacebookAuthProvider } from "firebase/auth";
 import { getAuth } from "firebase/auth";
 import {GithubAuthProvider } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 import { environment } from '../environments/environment';
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
@@ -14,7 +15,7 @@ export class SignupComponent implements OnInit {
   eyeIcon: string = "fa-eye-slash";
   signUpForm!: FormGroup;
   // constructor(private fb: FormBuilder) { }
-  constructor(private fb: FormBuilder, private auth: AngularFireAuth) { }
+  constructor(private fb: FormBuilder, private auth: AngularFireAuth, private router: Router) { }
 
 
   ngOnInit(): void {
@@ -50,7 +51,7 @@ export class SignupComponent implements OnInit {
       this.auth.createUserWithEmailAndPassword(email, password)
         .then(result => {
           // Handle successful signup
-          console.log(result);
+          this.router.navigate(['/courses']);
         })
         .catch(error => {
           // Handle errors
