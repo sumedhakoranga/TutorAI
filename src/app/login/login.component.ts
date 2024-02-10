@@ -5,6 +5,9 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FacebookAuthProvider } from 'firebase/auth';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { GithubAuthProvider } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+
+
 
 
 
@@ -135,7 +138,6 @@ export class LoginComponent implements OnInit {
       alert('Email address is required.');
     }
   }
-
 
 
 }

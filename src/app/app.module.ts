@@ -25,6 +25,7 @@ import { getAuth } from "firebase/auth";
 import {GithubAuthProvider } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 import { environment } from '../environments/environment';
+import { FirebaseApp } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [
@@ -60,4 +61,7 @@ import { environment } from '../environments/environment';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  public constructor(app: FirebaseApp) {
+  }
+}

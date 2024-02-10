@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { getDatabase, ref, set } from "firebase/database";
+
 
 @Component({
   selector: 'app-signup',
@@ -14,7 +16,7 @@ export class SignupComponent implements OnInit {
   isText: boolean = false;
   eyeIcon: string = "fa-eye-slash";
   signUpForm!: FormGroup;
-  // constructor(private fb: FormBuilder) { }
+
   constructor(private fb: FormBuilder, private auth: AngularFireAuth, private router: Router) { }
 
 
@@ -34,24 +36,24 @@ export class SignupComponent implements OnInit {
     this.isText ? this.type = "text" : this.type = "password";
   }
 
-  // onSignUp() {
-  //   if (this.signUpForm.valid) {
-  //     console.log(this.signUpForm.value)
-  //   } else {
-  //     this.validateALLFormFields(this.signUpForm);
-  //     alert("Your form is invalid")
-  //   }
-  // }
-
-
-
   onSignUp() {
     if (this.signUpForm.valid) {
-      const { email, password } = this.signUpForm.value;
+      const { email, password, username, } = this.signUpForm.value;
       this.auth.createUserWithEmailAndPassword(email, password)
-        .then(result => {
+        .then(userCredential => {
           // Handle successful signup
-          this.router.navigate(['/courses']);
+          const user = userCredential.user;
+          if (user) {
+            const uid = user.uid;
+            const db = getDatabase();
+            set(ref(db, 'users/' + uid), {
+              username: username,
+              email: email
+            });
+            this.router.navigate(['/courses']);
+          } else {
+            this.router.navigate(['/home']);
+          }
         })
         .catch(error => {
           // Handle errors
