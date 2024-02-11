@@ -26,7 +26,7 @@ export class CoursesComponent implements OnInit {
         const userId = user.uid;
         console.log(userId);
         const db = getDatabase();
-        onValue(ref(db, '/users/' + userId), (snapshot) => {
+        onValue(ref(db, '/learners/' + userId), (snapshot) => {
           this.username = snapshot.val().username || 'Anonymous';
         }, {
           onlyOnce: true

@@ -1,0 +1,35 @@
+.row{
+  height: 100vh;
+  max-width: 2090px;
+  margin: 0px 10px 100px 10px;
+  overflow: auto;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  height: 400px;
+  max-width: 400px;
+  border-radius: 5%;
+  border: 4px solid grey;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  box-shadow: -18px 14px 12px 0px rgba(150, 109, 2550, 0.1);
+  background-color: rgb(241, 236, 243);
+}
+
+.container > *{
+  margin:15px;
+}
+
+.container > h3{
+  font-size: 38px;
+  color: green;
+}
+
+.container > a{
+  width: 100px;
+}

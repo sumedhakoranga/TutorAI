@@ -46,7 +46,10 @@ export class SignupComponent implements OnInit {
           if (user) {
             const uid = user.uid;
             const db = getDatabase();
-            set(ref(db, 'users/' + uid), {
+            set(ref(db, 'users/' + uid), {       
+              type: 'learners'
+            });
+            set(ref(db, 'learners/' + uid), {
               username: username,
               email: email
             });

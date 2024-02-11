@@ -1,6 +1,6 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule, FormsModule} from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './intro-page/about/about.component';
@@ -10,22 +10,23 @@ import { LearnersComponent } from './intro-page/learners/learners.component';
 import { NavbarComponent } from './intro-page/navbar/navbar.component';
 import { WorkComponent } from './intro-page/work/work.component';
 import { FooterComponent } from './footer/footer.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import { CoursesComponent } from './student/courses/courses.component';
-import { ProgressComponent } from './student/progress/progress.component';
+import { LoginComponent } from './learner/login/login.component';
+import { SignupComponent } from './learner/signup/signup.component';
+import { CoursesComponent } from './learner/courses/courses.component';
+import { ProgressComponent } from './learner/progress/progress.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { ProfileComponent } from './student/profile/profile.component';
-import { TeachersComponent } from './student/teachers/teachers.component';
+import { ProfileComponent } from './learner/profile/profile.component';
+import { TeachersComponent } from './learner/teachers/teachers.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { GoogleAuthProvider } from "firebase/auth";
 import { FacebookAuthProvider } from "firebase/auth";
 import { getAuth } from "firebase/auth";
-import {GithubAuthProvider } from "firebase/auth";
+import { GithubAuthProvider } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 import { environment } from '../environments/environment';
 import { FirebaseApp } from '@angular/fire/compat';
+import { AccessAccountComponent } from './access-account/access-account.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { FirebaseApp } from '@angular/fire/compat';
     ProgressComponent,
     ProfileComponent,
     TeachersComponent,
+    AccessAccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,7 @@ import { FirebaseApp } from '@angular/fire/compat';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
   public constructor(app: FirebaseApp) {
   }
 }

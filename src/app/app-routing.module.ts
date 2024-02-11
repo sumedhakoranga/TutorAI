@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import { CoursesComponent } from './student/courses/courses.component';
-import { ProgressComponent } from './student/progress/progress.component';
-import { ProfileComponent } from './student/profile/profile.component';
-import { TeachersComponent } from './student/teachers/teachers.component';
+import { LoginComponent } from './learner/login/login.component';
+import { SignupComponent } from './learner/signup/signup.component';
+import { CoursesComponent } from './learner/courses/courses.component';
+import { ProgressComponent } from './learner/progress/progress.component';
+import { ProfileComponent } from './learner/profile/profile.component';
+import { TeachersComponent } from './learner/teachers/teachers.component';
+import { AccessAccountComponent } from './access-account/access-account.component';
 
 const routes: Routes = [
-  {path: 'login', component:LoginComponent},
-  {path: 'signup', component:SignupComponent},
-  {path: 'courses', component:CoursesComponent},
-  {path: 'progress', component:ProgressComponent},
+  { path: 'access-account', component: AccessAccountComponent },
+  { path: 'learner/login', component: LoginComponent },
+  { path: 'learner/signup', component: SignupComponent },
+  { path: 'courses', component: CoursesComponent },
+  { path: 'progress', component: ProgressComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'teachers', component: TeachersComponent }
 
