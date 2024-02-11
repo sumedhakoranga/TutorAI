@@ -54,10 +54,35 @@
           <h1>My Courses</h1>
         </div>
         <div class="col-auto">
-          <button type="button" class="btn btn-outline-primary">Edit Course</button>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Edit Course
+          </button>      
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Enroll now</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <button type="button" class="m-2">Mathematics</button>
+                  <button type="button" class="m-2">Science</button>
+                  <button type="button" class="m-3">English</button>
+                  <button type="button" class="">Social Science</button>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
-      <div class="row">
+      <!-- <div class="row">
         <section class="main-section col-md-6" id="courses">
           <p>Computer programming - JavaScript and the web <a href="#" class="badge-pill badge-primary">See all (8)</a>
           </p>
@@ -149,8 +174,18 @@
           </nav>
         </section>
 
+      </div> -->
+      <div>
+        <h1>Welcome, {{ username }}</h1>
+        <div class="container">
+          <button class="btn btn-primary m-3" *ngFor="let course of courses" routerLink="/">{{ courseMapping[course] }}</button>
+        </div>
+        <p>You are enrolled in {{courses.length}} courses</p>      
       </div>
+
+
     </div>
   </div>
 </div>
 </div>
+

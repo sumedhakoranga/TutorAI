@@ -10,12 +10,16 @@ import { Router } from '@angular/router';
 })
 
 export class CoursesComponent implements OnInit {
+
   constructor(private router: Router) { }
 
+  courses: any[] = [];
   username: string = 'Loading...';
+  courseMapping: any = {};
 
   ngOnInit() {
     this.getUserInfo();
+    this.fetchCourses();
   }
 
   getUserInfo() {
@@ -28,6 +32,8 @@ export class CoursesComponent implements OnInit {
         const db = getDatabase();
         onValue(ref(db, '/learners/' + userId), (snapshot) => {
           this.username = snapshot.val().username || 'Anonymous';
+          this.courses = snapshot.val().courses || [];
+          console.log(this.courses);
         }, {
           onlyOnce: true
         });
@@ -38,6 +44,25 @@ export class CoursesComponent implements OnInit {
     });
 
   }
+
+  fetchCourses() {
+    const db = getDatabase();
+    onValue(ref(db, '/courses'), (snapshot) => {
+      this.courseMapping = snapshot.val() || [];
+      this.courseMapping = this.courseMapping.map((course: string): string => {
+        return course
+          .split("_")
+          .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ");
+      });
+      console.log(this.courseMapping);
+    }, {
+      onlyOnce: true
+    });
+  }
+ 
+
+
 
 }
 
