@@ -27,6 +27,8 @@ import { getDatabase } from "firebase/database";
 import { environment } from '../environments/environment';
 import { FirebaseApp } from '@angular/fire/compat';
 import { AccessAccountComponent } from './access-account/access-account.component';
+import { MathematicsComponent } from './mathematics/mathematics.component';
+import { ScienceComponent } from './science/science.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { AccessAccountComponent } from './access-account/access-account.componen
     ProfileComponent,
     TeachersComponent,
     AccessAccountComponent,
+    MathematicsComponent,
+    ScienceComponent,
   ],
   imports: [
     BrowserModule,

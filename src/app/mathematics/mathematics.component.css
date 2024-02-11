@@ -1,0 +1,26 @@
+.quiz-container {
+   max-width: 600px;
+   margin: auto;
+   padding-top: 2rem;
+   min-height: 100vh;
+ }
+
+ .quiz-header {
+   text-align: center;
+   margin-bottom: 2rem;
+ }
+
+ .quiz-question {
+   margin-bottom: 1rem;
+   font-size: larger;
+ }
+
+ .quiz-options {
+   margin-bottom: 2rem;
+ }
+
+ .submit-btn {
+   display: block;
+   width: 100%;
+   margin-bottom: 90px;
+ }

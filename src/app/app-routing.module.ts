@@ -7,11 +7,15 @@ import { ProgressComponent } from './learner/progress/progress.component';
 import { ProfileComponent } from './learner/profile/profile.component';
 import { TeachersComponent } from './learner/teachers/teachers.component';
 import { AccessAccountComponent } from './access-account/access-account.component';
+import { MathematicsComponent } from './mathematics/mathematics.component';
+import { ScienceComponent } from './science/science.component';
 
 const routes: Routes = [
   { path: 'access-account', component: AccessAccountComponent },
   { path: 'learner/login', component: LoginComponent },
   { path: 'learner/signup', component: SignupComponent },
+  { path: 'mathematics', component: MathematicsComponent },
+  { path: 'science', component: ScienceComponent },
   { path: 'courses', component: CoursesComponent },
   { path: 'progress', component: ProgressComponent },
   { path: 'profile', component: ProfileComponent },
