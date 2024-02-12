@@ -178,7 +178,7 @@
       <div>
         <h1>Welcome, {{ username }}</h1>
         <div class="container">
-          <button class="btn btn-primary m-3" *ngFor="let course of courses" routerLink="/">{{ courseMapping[course] }}</button>
+          <button class="btn btn-primary m-3" *ngFor="let course of courses" routerLink="/mathematics">{{ courseMapping[course] }}</button>
         </div>
         <p>You are enrolled in {{courses.length}} courses</p>      
       </div>

@@ -29,6 +29,9 @@ import { FirebaseApp } from '@angular/fire/compat';
 import { AccessAccountComponent } from './access-account/access-account.component';
 import { MathematicsComponent } from './mathematics/mathematics.component';
 import { ScienceComponent } from './science/science.component';
+import { EnglishComponent } from './English/english/english.component';
+import { SocialscienceComponent } from './socialscience/socialscience.component';
+import { ComprehensionComponent } from './English/comprehension/comprehension.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +52,9 @@ import { ScienceComponent } from './science/science.component';
     AccessAccountComponent,
     MathematicsComponent,
     ScienceComponent,
+    EnglishComponent,
+    SocialscienceComponent,
+    ComprehensionComponent,
   ],
   imports: [
     BrowserModule,

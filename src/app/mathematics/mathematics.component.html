@@ -1,28 +1,27 @@
 <div class="container quiz-container">
-  <h2 class="quiz-header">Mathematics</h2>
-  <form>
-    <!-- Question 1 -->
-    <div class="quiz-question">
-      <p>1. What is the area of a circle with a radius of 5 units?</p>
-      <textarea class="form-control" id="question1" name="question1" rows="2"
-        placeholder="Type your answer here"></textarea>
-    </div>
-
-    <!-- Question 2 -->
-    <div class="quiz-question">
-      <p>2. Solve for x in the equation 2x + 3 = 11.</p>
-      <textarea class="form-control" id="question2" name="question2" rows="2"
-        placeholder="Type your answer here"></textarea>
-    </div>
-
-    <!-- Question 3 -->
-    <div class="quiz-question">
-      <p>3. If the function f(x) = x^2, what is f(4)?</p>
-      <textarea class="form-control" id="question3" name="question3" rows="2"
-        placeholder="Type your answer here"></textarea>
-    </div>
-
-    <!-- Submit button -->
-    <button type="submit" class="btn btn-primary submit-btn">Submit</button>
-  </form>
+  <h2 class="quiz-header">Mathematics Quiz</h2>
+  <div *ngIf="showScore">
+    <h2>Your Score: {{score}}/{{mathQuestions.length}}</h2>
+    <button routerLink="/courses" class="btn btn-primary">Go Home</button>
+  </div>
+  <div *ngIf="!showScore">
+    <form (submit)="submitAnswer()">
+      <div class="quiz-question" *ngIf="mathQuestions.length > 0; else loading">
+        <h2>Question {{currentQuestionIndex + 1}}:</h2>
+        <p>{{ mathQuestions[currentQuestionIndex].question }}</p>
+        <div class="form-group quiz-answer">
+          <label for="userAnswer">Your Answer:</label>
+          <textarea class="form-control" id="userAnswer" [(ngModel)]="selectedAnswer" name="selectedAnswer" rows="2"
+            placeholder="Type your answer here" required #userAnswer="ngModel"></textarea>
+          <!-- <div *ngIf="alertVisible" class="alert alert-danger">
+            Answer is required.
+          </div> -->
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary submit-btn" [disabled]="!selectedAnswer">Next</button>
+    </form>
+  </div>
+  <ng-template #loading>
+    <p>Loading questions...</p>
+  </ng-template>
 </div>

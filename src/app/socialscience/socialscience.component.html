@@ -1,11 +1,11 @@
 <div class="container quiz-container" *ngIf="!showScore; else scoreTemplate">
-  <h2 class="quiz-header">Science Quiz</h2>
+  <h2 class="quiz-header">Social Science Quiz</h2>
   <form>
-    <div class="quiz-question" *ngIf="scienceQuestions.length > 0; else loading">
+    <div class="quiz-question" *ngIf="socialscienceQuestions.length > 0; else loading">
       <h2>Question:</h2>
-      <p>{{ scienceQuestions[currentQuestionIndex].question }}</p>
+      <p>{{ socialscienceQuestions[currentQuestionIndex].question }}</p>
       <h2>Answer:</h2>
-      <div class="quiz-answer" *ngFor="let choice of scienceQuestions[currentQuestionIndex].choices; let i = index">
+      <div class="quiz-answer" *ngFor="let choice of socialscienceQuestions[currentQuestionIndex].choices; let i = index">
         <input type="radio" [id]="'choice' + i" name="answer" [(ngModel)]="selectedAnswer" [value]="i">
         <label [for]="'choice' + i">{{ choice }}</label>
       </div>
@@ -16,12 +16,12 @@
     </ng-template>
 
     <button type="button" class="btn btn-primary submit-btn" (click)="checkAnswer()">
-      {{ currentQuestionIndex < scienceQuestions.length - 1 ? 'Next' : 'Submit' }} </button>
+      {{ currentQuestionIndex < socialscienceQuestions.length - 1 ? 'Next' : 'Submit' }} </button>
   </form>
 </div>
 <ng-template #scoreTemplate>
   <div class="scoreTemp">
-    <h2>Your Score: {{ score }}/{{ scienceQuestions.length }}</h2>
+    <h2>Your Score: {{ score }}/{{ socialscienceQuestions.length }}</h2>
     <button class="btn btn-primary" routerLink="/courses">Go to Course Page</button>
   </div>
 </ng-template>

@@ -3,23 +3,21 @@ import { getDatabase, ref, onValue } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Router } from '@angular/router';
 
-
 @Component({
-  selector: 'app-science',
-  templateUrl: './science.component.html',
-  styleUrl: './science.component.css'
+  selector: 'app-comprehension',
+  templateUrl: './comprehension.component.html',
+  styleUrl: './comprehension.component.css'
 })
-export class ScienceComponent implements OnInit {
+export class ComprehensionComponent implements OnInit {
 
-  scienceQuestions: any = {};
-  // question: string = 'Wait..';
-  // answer: string;
+  comprehensionQuestions: any = {};
+  question: string = 'Wait..';
+  answer: string;
+  username: string;
   currentQuestionIndex: number = 0;
   score = 0;
   selectedAnswer: string;
-  username: string;
   showScore = false;
-  scoreTemplate:any;
 
   constructor(private router: Router) { }
 
@@ -52,9 +50,9 @@ export class ScienceComponent implements OnInit {
 
   loadQuestions() {
     const db = getDatabase();
-    onValue(ref(db, '/questions/science'), (snapshot) => {
+    onValue(ref(db, '/questions/english/other'), (snapshot) => {
       const allQuestions = snapshot.val();
-      this.scienceQuestions = this.shuffleArray(allQuestions).slice(0, 5);
+      this.comprehensionQuestions = this.shuffleArray(allQuestions).slice(0, 5);
       this.currentQuestionIndex = 0;
     }, {
       onlyOnce: true
@@ -69,8 +67,9 @@ export class ScienceComponent implements OnInit {
     return array;
   }
 
+
   nextQuestion() {
-    if (this.currentQuestionIndex < this.scienceQuestions.length - 1) {
+    if (this.currentQuestionIndex < this.comprehensionQuestions.length - 1) {
       this.currentQuestionIndex++;
       this.selectedAnswer = '';
     } else {
@@ -79,7 +78,7 @@ export class ScienceComponent implements OnInit {
   }
 
   checkAnswer() {
-    const currentQuestion = this.scienceQuestions[this.currentQuestionIndex];
+    const currentQuestion = this.comprehensionQuestions[this.currentQuestionIndex];
     console.log(this.selectedAnswer);
     console.log(currentQuestion.answer);
     if (this.selectedAnswer === currentQuestion.answer) {
@@ -88,10 +87,13 @@ export class ScienceComponent implements OnInit {
     } else {
       console.log("Incorrect answer!");
     }
-    if (this.currentQuestionIndex < this.scienceQuestions.length - 1) {
+    if (this.currentQuestionIndex < this.comprehensionQuestions.length - 1) {
       this.nextQuestion();
     } else {
       this.showScore = true;
     }
   }
+
+
 }
+

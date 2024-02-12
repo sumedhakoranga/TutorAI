@@ -9,6 +9,9 @@ import { TeachersComponent } from './learner/teachers/teachers.component';
 import { AccessAccountComponent } from './access-account/access-account.component';
 import { MathematicsComponent } from './mathematics/mathematics.component';
 import { ScienceComponent } from './science/science.component';
+import { EnglishComponent } from './English/english/english.component';
+import { SocialscienceComponent } from './socialscience/socialscience.component';
+import { ComprehensionComponent } from './English/comprehension/comprehension.component';
 
 const routes: Routes = [
   { path: 'access-account', component: AccessAccountComponent },
@@ -16,6 +19,9 @@ const routes: Routes = [
   { path: 'learner/signup', component: SignupComponent },
   { path: 'mathematics', component: MathematicsComponent },
   { path: 'science', component: ScienceComponent },
+  { path: 'english', component: EnglishComponent },
+  { path: 'comprehension', component: ComprehensionComponent },
+  { path: 'socialscience', component: SocialscienceComponent },
   { path: 'courses', component: CoursesComponent },
   { path: 'progress', component: ProgressComponent },
   { path: 'profile', component: ProfileComponent },
