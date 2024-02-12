@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { getDatabase, ref, onValue } from "firebase/database";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { Router } from '@angular/router';
 
 @Component({
@@ -60,10 +60,19 @@ export class CoursesComponent implements OnInit {
       onlyOnce: true
     });
   }
+
+  //logout
+
+  logout(){
+    const auth = getAuth();
+    signOut(auth).then(()=>{
+      console.log('User signed out');
+      this.router.navigate(['/intro-page']);
+    }).catch((error)=>{
+      console.error("logout error");
+    });
+  }
  
-
-
-
 }
 
 
