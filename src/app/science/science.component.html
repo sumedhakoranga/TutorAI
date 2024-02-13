@@ -1,27 +1,55 @@
-<div class="container quiz-container" *ngIf="!showScore; else scoreTemplate">
-  <h2 class="quiz-header">Science Quiz</h2>
-  <form>
-    <div class="quiz-question" *ngIf="scienceQuestions.length > 0; else loading">
-      <h2>Question:</h2>
-      <p>{{ scienceQuestions[currentQuestionIndex].question }}</p>
-      <h2>Answer:</h2>
-      <div class="quiz-answer" *ngFor="let choice of scienceQuestions[currentQuestionIndex].choices; let i = index">
-        <input type="radio" [id]="'choice' + i" name="answer" [(ngModel)]="selectedAnswer" [value]="i">
-        <label [for]="'choice' + i">{{ choice }}</label>
-      </div>
-    </div>
-
-    <ng-template #loading>
-      <p>Loading questions...</p>
-    </ng-template>
-
-    <button type="button" class="btn btn-primary submit-btn" (click)="checkAnswer()">
-      {{ currentQuestionIndex < scienceQuestions.length - 1 ? 'Next' : 'Submit' }} </button>
-  </form>
+<!-- Introduction Section -->
+<div class="container bg-light py-5" *ngIf="!hasQuizStarted">
+  <h1 class="display-5 fw-bold">Welcome to Science</h1>
+  <p class="col-md-8 fs-4">This quiz will contain a total of 5 questions. Each Question holds 1 Point.</p>
+  <h4>Rules:</h4>
+  <ol>
+    <li>Correct Question gives you 1 point.</li>
+    <li>Refreshing the page will reset the Quiz.</li>
+  </ol>
+  <h1 style="font-family: cursive;text-align:center">All the best!!</h1>
+  <button class="btn btn-primary btn-lg" (click)="startQuiz()">Start the Quiz!!</button>
 </div>
-<ng-template #scoreTemplate>
-  <div class="scoreTemp">
-    <h2>Your Score: {{ score }}/{{ scienceQuestions.length }}</h2>
-    <button class="btn btn-primary" routerLink="/courses">Go to Course Page</button>
+
+<!-- Quiz Section -->
+<div class="container quiz-container" *ngIf="hasQuizStarted">
+  <div *ngIf="!showScore; else scoreTemplate">
+    <div class="progress" style="margin-bottom: 20px;">
+      <div class="progress-bar bg-success" role="progressbar" [style.width]="getProgress()" aria-valuenow="25"
+        aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <h2 class="quiz-header">Science Quiz</h2>
+    <form>
+      <div *ngIf="scienceQuestions.length > 0; else loading">
+        <h2>Question:</h2>
+        <p>{{ scienceQuestions[currentQuestionIndex].question }}</p>
+        <h2>Answer:</h2>
+        <div class="multichoice" *ngFor="let choice of scienceQuestions[currentQuestionIndex].choices; let i = index">
+          <input type="radio" [id]="'choice' + i" name="answer" [(ngModel)]="selectedAnswer" [value]="i">
+          <label [for]="'choice' + i">{{ choice }}</label>
+        </div>
+        <div *ngIf="answerFeedback" class="feedback">
+          <p>{{ answerFeedback }}</p>
+          <button *ngIf="currentAnswerCorrect === false" type="button" class="btn btn-warning" (click)="tryAgain()">Try
+            Again</button>
+          <button *ngIf="currentQuestionIndex < scienceQuestions.length" type="button" class="btn btn-secondary"
+            (click)="moveToNextQuestion()">Next Question</button>
+        </div>
+      </div>
+
+      <ng-template #loading>
+        <p>Loading questions...</p>
+      </ng-template>
+      <button type="button" class="btn btn-primary submit-btn" (click)="checkAnswer()"
+        [disabled]="selectedAnswer === undefined || selectedAnswer === null || selectedAnswer === ''">
+        Submit Answer
+      </button>
+    </form>
   </div>
-</ng-template>
+  <ng-template #scoreTemplate>
+    <div class="scoreTemp">
+      <h2>Your Score: {{ score }}/{{ scienceQuestions.length }}</h2>
+      <button class="btn btn-primary" routerLink='/courses'>Go to Course Page</button>
+    </div>
+  </ng-template>
+</div>

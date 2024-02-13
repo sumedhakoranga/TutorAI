@@ -10,24 +10,32 @@ import { Router } from '@angular/router';
   styleUrl: './science.component.css'
 })
 export class ScienceComponent implements OnInit {
-
+  hasQuizStarted = false;
   scienceQuestions: any = {};
-  // question: string = 'Wait..';
-  // answer: string;
+  username: string;
   currentQuestionIndex: number = 0;
   score = 0;
-  selectedAnswer: string;
-  username: string;
   showScore = false;
   scoreTemplate:any;
+  currentAnswerCorrect: boolean | null = null;
+  answerFeedback: string = '';
+  selectedAnswer: string | null = null; 
 
   constructor(private router: Router) { }
 
-
-  ngOnInit(): void {
-    this.getUserInfo();
+  startQuiz() {
+    this.hasQuizStarted = true;
     this.loadQuestions();
   }
+
+  getProgress(): string {
+    const progress = ((this.currentQuestionIndex + 1) / this.scienceQuestions.length) * 100;
+    return `${progress}%`;
+  }
+  ngOnInit(): void {
+    this.getUserInfo();
+  }
+
 
   getUserInfo() {
     const auth = getAuth();
@@ -56,6 +64,8 @@ export class ScienceComponent implements OnInit {
       const allQuestions = snapshot.val();
       this.scienceQuestions = this.shuffleArray(allQuestions).slice(0, 5);
       this.currentQuestionIndex = 0;
+      this.showScore = false;
+      this.score = 0;
     }, {
       onlyOnce: true
     });
@@ -74,24 +84,44 @@ export class ScienceComponent implements OnInit {
       this.currentQuestionIndex++;
       this.selectedAnswer = '';
     } else {
-      console.log("End of questions");
+      this.showScore = true;
     }
   }
 
   checkAnswer() {
     const currentQuestion = this.scienceQuestions[this.currentQuestionIndex];
-    console.log(this.selectedAnswer);
-    console.log(currentQuestion.answer);
-    if (this.selectedAnswer === currentQuestion.answer) {
-      console.log("Correct answer!");
-      this.score++;
-    } else {
-      console.log("Incorrect answer!");
+    if (this.selectedAnswer !== undefined && currentQuestion.answer !== undefined) {
+      if (this.selectedAnswer === currentQuestion.answer) {
+        this.score++;
+        this.answerFeedback = 'Correct! Well done.';
+        this.currentAnswerCorrect = true;
+      } else {
+        this.answerFeedback = `Incorrect. Try again or move to the next question.`;
+        this.currentAnswerCorrect = false;
+      }
     }
+  }
+
+
+  tryAgain() {
+    this.selectedAnswer = '';
+    this.answerFeedback = '';
+    this.currentAnswerCorrect = null;
+  }
+
+  moveToNextQuestion() {
     if (this.currentQuestionIndex < this.scienceQuestions.length - 1) {
-      this.nextQuestion();
+      this.currentQuestionIndex++;
     } else {
       this.showScore = true;
     }
+    // Reset for the next question or the end of the quiz
+    this.selectedAnswer = '';
+    this.answerFeedback = '';
+    this.currentAnswerCorrect = null;
   }
+
+
+
+
 }

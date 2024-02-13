@@ -26,7 +26,6 @@ export class MathematicsComponent implements OnInit {
   startQuiz() {
     this.hasQuizStarted = true;
     this.loadQuestions();
-
   }
 
   getProgress(): string {
@@ -39,7 +38,7 @@ export class MathematicsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserInfo();
-    this.loadQuestions();
+    // this.loadQuestions();
   }
 
   getUserInfo() {
