@@ -1,24 +1,47 @@
-<div class="container quiz-container">
+<!-- Introduction Section -->
+<div class="container bg-light py-5" *ngIf="!hasQuizStarted">
+  <h1 class="display-5 fw-bold">Welcome to Mathematics World</h1>
+  <p class="col-md-8 fs-4">This quiz will contain a total of 5 questions. Each Question holds 1 Points.</p>
+  <h4>Rules:</h4>
+  <ol>
+    <li>Correct Question gives you 1 points.</li>
+    <!-- <li>Incorrect question gives to -10 points.</li> -->
+    <li>You will have 60 sec to answer each question.</li>
+    <li>Refreshing the page will reset the Quiz.</li>
+  </ol>
+  <h1 style="font-family: cursive;text-align:center">All the best!!</h1>
+  <button class="btn btn-primary btn-lg" (click)="startQuiz()">Start the Quiz!!</button>
+</div>
+
+
+<!-- Quiz Section -->
+<div class="container quiz-container" *ngIf="hasQuizStarted">
+  <div class="progress" style="margin-bottom: 20px;">
+    <div class="progress-bar bg-success" role="progressbar" [style.width]="getProgress()" aria-valuenow="25"
+      aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
   <h2 class="quiz-header">Mathematics Quiz</h2>
   <div *ngIf="showScore">
     <h2>Your Score: {{score}}/{{mathQuestions.length}}</h2>
     <button routerLink="/courses" class="btn btn-primary">Go Home</button>
   </div>
   <div *ngIf="!showScore">
-    <form (submit)="submitAnswer()">
+    <form (submit)="submitAnswer() ; $event.preventDefault()">
       <div class="quiz-question" *ngIf="mathQuestions.length > 0; else loading">
         <h2>Question {{currentQuestionIndex + 1}}:</h2>
         <p>{{ mathQuestions[currentQuestionIndex].question }}</p>
         <div class="form-group quiz-answer">
           <label for="userAnswer">Your Answer:</label>
           <textarea class="form-control" id="userAnswer" [(ngModel)]="selectedAnswer" name="selectedAnswer" rows="2"
-            placeholder="Type your answer here" required #userAnswer="ngModel"></textarea>
-          <!-- <div *ngIf="alertVisible" class="alert alert-danger">
-            Answer is required.
-          </div> -->
+            placeholder="Type your answer here" required></textarea>
         </div>
       </div>
       <button type="submit" class="btn btn-primary submit-btn" [disabled]="!selectedAnswer">Next</button>
+      <div *ngIf="currentAnswerCorrect !== null">
+        <p>{{ answerFeedback }}</p>
+        <button *ngIf="!currentAnswerCorrect" class="btn btn-warning" (click)="tryAgain()">Try Again</button>
+        <button class="btn btn-success m-2" (click)="moveToNextQuestion()">Next Question</button>
+      </div>
     </form>
   </div>
   <ng-template #loading>

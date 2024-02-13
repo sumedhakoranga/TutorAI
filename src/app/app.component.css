@@ -1,0 +1,21 @@
+.navbar{
+  background-color: #5e8d83;
+}
+
+.navbar-center-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-logo {
+  width: auto;
+  height: 50px;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .nav-logo {
+    height: 40px;
+  }
+}

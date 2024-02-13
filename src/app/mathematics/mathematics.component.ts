@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrl: './mathematics.component.css'
 })
 export class MathematicsComponent implements OnInit {
-
+  hasQuizStarted = false;
   mathQuestions: any = [];
   username: string;
   currentQuestionIndex: number = 0;
@@ -17,8 +17,24 @@ export class MathematicsComponent implements OnInit {
   selectedAnswer: string;
   showScore = false;
   alertVisible = false;
+  currentAnswerCorrect: boolean | null = null;
+  answerFeedback: string = '';
 
   constructor(private router: Router) { }
+
+
+  startQuiz() {
+    this.hasQuizStarted = true;
+    this.loadQuestions();
+
+  }
+
+  getProgress(): string {
+    const progress = ((this.currentQuestionIndex + 1) / this.mathQuestions.length) * 100;
+    return `${progress}%`;
+  }
+
+
 
 
   ngOnInit(): void {
@@ -89,15 +105,35 @@ export class MathematicsComponent implements OnInit {
   }
 
   submitAnswer() {
-    this.checkAnswer();
-    if (this.currentQuestionIndex < Math.min(this.mathQuestions.length, 5) - 1) {
+    const currentQuestion = this.mathQuestions[this.currentQuestionIndex];
+    this.currentAnswerCorrect = this.selectedAnswer.trim().toLowerCase() === currentQuestion.answer.trim().toLowerCase();
+
+    if (this.currentAnswerCorrect) {
+      this.score++;
+      this.answerFeedback = 'Correct! Well done.';
+    } else {
+      this.answerFeedback = `Incorrect. The correct answer is: ${currentQuestion.answer}`;
+    }
+
+    // Don't automatically move to the next question
+  }
+
+  tryAgain() {
+    // Reset for trying the same question again
+    this.selectedAnswer = '';
+    this.currentAnswerCorrect = null;
+    this.answerFeedback = '';
+  }
+
+  moveToNextQuestion() {
+    if (this.currentQuestionIndex < this.mathQuestions.length - 1) {
       this.currentQuestionIndex++;
       this.selectedAnswer = '';
+      this.currentAnswerCorrect = null;
+      this.answerFeedback = '';
     } else {
       this.showScore = true;
     }
   }
-
-
 
 }

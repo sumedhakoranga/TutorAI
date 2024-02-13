@@ -1,8 +1,39 @@
-<div class="container-fluid sticky-top bg-success">
-  <h1 class="text-center mb-0">Tutor.AI</h1>
-</div>
+<nav class="navbar navbar-expand-lg ">
+  <div class="container-fluid">
+    <div class="navbar-center-logo mx-auto">
+      <img src="/assets/img/TutorAI.png" alt="logo" class="nav-logo">
+    </div>
+    <a class=" m-2 navbar-brand" routerLink="/">Tutor.AI</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" role="button" routerLink="/access-account">Sign Up</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" routerLink="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            courses
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" routerLink="/">Action</a></li>
+            <li><a class="dropdown-item" routerLink="/">Another action</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" routerLink="/">Something else here</a></li>
+          </ul>
+        </li>
+        <li><a href="#" (click)="logout()" class="nav-link px-2 link-dark">logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 <router-outlet></router-outlet>
-<app-navbar *ngIf ="showHeaderFooter"></app-navbar>
+<app-intro *ngIf="showHeaderFooter"></app-intro>
 <app-footer ></app-footer>
 
 

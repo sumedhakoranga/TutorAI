@@ -9,16 +9,4 @@ import { Router } from '@angular/router';
 })
 export class ProgressComponent {
   constructor(private router: Router) { }
-
-  //logout
-
-  logout() {
-    const auth = getAuth();
-    signOut(auth).then(() => {
-      console.log('User signed out');
-      this.router.navigate(['/intro-page']);
-    }).catch((error) => {
-      console.error("logout error");
-    });
-  }
 }

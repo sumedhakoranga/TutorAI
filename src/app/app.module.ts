@@ -7,7 +7,6 @@ import { AboutComponent } from './intro-page/about/about.component';
 import { DifferenceComponent } from './intro-page/difference/difference.component';
 import { IntroComponent } from './intro-page/intro/intro.component';
 import { LearnersComponent } from './intro-page/learners/learners.component';
-import { NavbarComponent } from './intro-page/navbar/navbar.component';
 import { WorkComponent } from './intro-page/work/work.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './learner/login/login.component';
@@ -40,7 +39,6 @@ import { ComprehensionComponent } from './English/comprehension/comprehension.co
     DifferenceComponent,
     IntroComponent,
     LearnersComponent,
-    NavbarComponent,
     WorkComponent,
     FooterComponent,
     LoginComponent,

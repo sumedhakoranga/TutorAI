@@ -1,20 +1,21 @@
-/* img{
-  width: 440px;
-  height: 400px ;
-  display:block;
-  float: right;
-  padding-top:20%;
- } */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+  h1{
+    color: #4c7273;
+  }
  h2{
-  font-size: xx-large;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-style: italic;
+  font-family: "Roboto", serif;
  }
  h3{
   padding-top:15%;
  }
  p{
-  font-size: xx-large;
-  font-family:Georgia, 'Times New Roman', Times, serif;
-  color:rgb(83, 83, 146);
+  font-size: x-large;
+  font-family: "Roboto", serif;
+  color:#4c7273;
+ }
+ 
+ img{
+  border: 2px dashed #4c7273;
+  border-radius: 10%;
  }

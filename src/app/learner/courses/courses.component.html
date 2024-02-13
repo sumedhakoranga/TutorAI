@@ -1,81 +1,126 @@
 <div class="courses_component">
-<header class="p-3 mb-3 border-bottom bg-color light">
-  <div class="container">
-    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-      <button class="border-0 bg-primary px-2 mx-2 rounded">Your EXP
-        <span class="fa fa-bolt"></span>
-      </button>
+  <header class="p-3 mb-3 border-bottom bg-color light">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <button class="border-0 bg-primary px-2 mx-2 rounded">Your EXP
+          <span class="fa fa-bolt"></span>
+        </button>
 
-      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-dark">Courses</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">Practice</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">Resources</a></li>
-        <li><a href="#" (click)="logout()" class="nav-link px-2 link-dark">logOut</a></li>
-      </ul>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="#" class="nav-link px-2 link-dark">Courses</a></li>
+          <li><a href="#" class="nav-link px-2 link-dark">Practice</a></li>
+          <li><a href="#" class="nav-link px-2 link-dark">Resources</a></li>
+        </ul>
 
-      <p class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 text-center">{{username}}</p>
+        <p class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 text-center">{{username}}</p>
 
-      <div class="user_profile">
-        <a routerLink="/" class="text-decoration-none" id="user">
-          <img src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
-            alt="image" width="32" height="32" class="rounded-circle">
-        </a>
+        <div class="user_profile">
+          <a routerLink="/" class="text-decoration-none" id="user">
+            <img src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
+              alt="image" width="32" height="32" class="rounded-circle">
+          </a>
+        </div>
       </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12 col-md-2 nav_content mt-0">
-      <main class="container">
-        <nav id="navbar">
-          <section class="mt-4 text-center">
-            <h5 class="">My Stuff</h5>
-            <ul class="list-unstyled">
-              <li><a class="nav-link my-3 p-3" routerLink="/courses">Courses</a></li>
-            </ul>
-          </section>
-          <section class="text-center">
-            <h5>My Account</h5>
-            <ul class="list-unstyled">
-              <li><a class="nav-link my-3 p-3" routerLink="/progress">Progress</a></li>
-              <li><a class="nav-link my-3 p-3" routerLink="/profile">Profile</a></li>
-              <li><a class="nav-link my-3 p-3" routerLink="/teachers">Teachers</a></li>
-            </ul>
-          </section>
-        </nav>
-      </main>
-
+  <!-- Loader -->
+  <div *ngIf="isLoading" class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
     </div>
+  </div>
 
-    <div class="col-sm-12 col-md-10 dashboard">
-      <div class="row align-items-center">
-        <div class="col">
-          <h1>My Courses</h1>
+  <div *ngIf="!isLoading" class="courses_component">
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-2 nav_content mt-0">
+          <main class="container">
+            <nav id="navbar">
+              <section class="mt-4 text-center">
+                <h5 class="">My Stuff</h5>
+                <ul class="list-unstyled">
+                  <li><a class="nav-link my-3 p-3" routerLink="/courses">Courses</a></li>
+                </ul>
+              </section>
+              <section class="text-center">
+                <h5>My Account</h5>
+                <ul class="list-unstyled">
+                  <li><a class="nav-link my-3 p-3" routerLink="/progress">Progress</a></li>
+                  <li><a class="nav-link my-3 p-3" routerLink="/profile">Profile</a></li>
+                  <li><a class="nav-link my-3 p-3" routerLink="/teachers">Teachers</a></li>
+                </ul>
+              </section>
+            </nav>
+          </main>
+
         </div>
-        <div class="col-auto">
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Edit Course
-          </button>      
-          <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Enroll now</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+        <div class="col-sm-12 col-md-10 dashboard">
+          <div class="row align-items-center">
+            <div class="col">
+              <h1>My Courses</h1>
+            </div>
+            <div class="col-auto">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Edit Course
+              </button>
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Enroll now</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="styled-checkbox m-2">
+                        <input type="checkbox" id="mathematics">
+                        <label for="mathematics">Mathematics</label>
+                      </div>
+                      <div class="styled-checkbox m-2">
+                        <input type="checkbox" id="science">
+                        <label for="science">Science</label>
+                      </div>
+                      <div class="styled-checkbox m-2">
+                        <input type="checkbox" id="english">
+                        <label for="english">English</label>
+                      </div>
+                      <div class="styled-checkbox m-2">
+                        <input type="checkbox" id="socialScience">
+                        <label for="socialScience">Social Science</label>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
                 </div>
-                <div class="modal-body">
-                  <button type="button" class="m-2">Mathematics</button>
-                  <button type="button" class="m-2">Science</button>
-                  <button type="button" class="m-3">English</button>
-                  <button type="button" class="">Social Science</button>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+
+
+
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-10 dashboard">
+            <div class="row">
+              <h5 class="py-3 ouruser">Welcome, {{ username }}</h5>
+              <div class="col-md-4 mb-4" *ngFor="let course of courses">
+                <div class="card course-card">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ courseMapping[course] }}</h5>
+                    <p class="card-text">Let's dive into the fun quizes!!!!</p>
+                    <a routerLink="/science" class="stretched-link"></a>
+                  </div>
+                  <div class="card-footer bg-transparent border-0 text-muted">
+                    <span class="proceed-arrow">Proceed <i class="fa fa-arrow-right"></i></span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -83,110 +128,9 @@
 
         </div>
       </div>
-      <!-- <div class="row">
-        <section class="main-section col-md-6" id="courses">
-          <p>Computer programming - JavaScript and the web <a href="#" class="badge-pill badge-primary">See all (8)</a>
-          </p>
-          <hr>
-          <nav class="navmenu">
-            <ul class="list-unstyled">
-              <li class="active">
-                <div class="">
-                  <a href="" class="" aria-label="">
-                    <img class="course_image"
-                      src="https://cdn.kastatic.org/genfiles/topic-icons/icons/markup.png-8a1e75-128c.png" alt=""
-                      height="24px" width="24px"><span>Intro to HTML/CSS: Making Web Pages</span>
-                  </a>
-                </div>
-              </li>
-              <li class="active">
-                <div class="">
-                  <a href="" class="" aria-label="">
-                    <img class="course_image"
-                      src="https://cdn.kastatic.org/genfiles/topic-icons/icons/markup.png-8a1e75-128c.png" alt=""
-                      height="24px" width="24px"><span>Intro to HTML/CSS: Making Web Pages</span>
-                  </a>
-                </div>
-              </li>
-              <li class="active">
-                <div class="">
-                  <a href="" class="" aria-label="">
-                    <img class="course_image"
-                      src="https://cdn.kastatic.org/genfiles/topic-icons/icons/markup.png-8a1e75-128c.png" alt=""
-                      height="24px" width="24px"><span>Intro to HTML/CSS: Making Web Pages</span>
-                  </a>
-                </div>
-              </li>
-              <li class="active">
-                <div class="">
-                  <a href="" class="" aria-label="">
-                    <img class="course_image"
-                      src="https://cdn.kastatic.org/genfiles/topic-icons/icons/markup.png-8a1e75-128c.png" alt=""
-                      height="24px" width="24px"><span>Intro to HTML/CSS: Making Web Pages</span>
-                  </a>
-                </div>
-              </li>
-            </ul>
-          </nav>
-        </section>
-        <section class="main-section col-md-6" id="courses">
-          <p>Computer programming - JavaScript and the web <a href="#" class="badge-pill badge-primary">See all (8)</a>
-          </p>
-          <hr>
-          <nav class="navmenu">
-            <ul class="list-unstyled">
-              <li class="active">
-                <div class="">
-                  <a href="" class="" aria-label="">
-                    <img class="course_image"
-                      src="https://cdn.kastatic.org/genfiles/topic-icons/icons/markup.png-8a1e75-128c.png" alt=""
-                      height="24px" width="24px"><span>Intro to HTML/CSS: Making Web Pages</span>
-                  </a>
-                </div>
-              </li>
-              <li class="active">
-                <div class="">
-                  <a href="" class="" aria-label="">
-                    <img class="course_image"
-                      src="https://cdn.kastatic.org/genfiles/topic-icons/icons/markup.png-8a1e75-128c.png" alt=""
-                      height="24px" width="24px"><span>Intro to HTML/CSS: Making Web Pages</span>
-                  </a>
-                </div>
-              </li>
-              <li class="active">
-                <div class="">
-                  <a href="" class="" aria-label="">
-                    <img class="course_image"
-                      src="https://cdn.kastatic.org/genfiles/topic-icons/icons/markup.png-8a1e75-128c.png" alt=""
-                      height="24px" width="24px"><span>Intro to HTML/CSS: Making Web Pages</span>
-                  </a>
-                </div>
-              </li>
-              <li class="active">
-                <div class="">
-                  <a href="" class="" aria-label="">
-                    <img class="course_image"
-                      src="https://cdn.kastatic.org/genfiles/topic-icons/icons/markup.png-8a1e75-128c.png" alt=""
-                      height="24px" width="24px"><span>Intro to HTML/CSS: Making Web Pages</span>
-                  </a>
-                </div>
-              </li>
-            </ul>
-          </nav>
-        </section>
-
-      </div> -->
-      <div>
-        <h1>Welcome, {{ username }}</h1>
-        <div class="container">
-          <button class="btn btn-primary m-3" *ngFor="let course of courses" routerLink="/mathematics">{{ courseMapping[course] }}</button>
-        </div>
-        <p>You are enrolled in {{courses.length}} courses</p>      
-      </div>
-
-
     </div>
   </div>
-</div>
-</div>
 
+
+
+</div>

@@ -1,6 +1,6 @@
 .outer{
   height:100vh;
-  background: linear-gradient(to top, #254d12 50%, #2a5a14 90%);
+  background: rgb(243, 250, 247);
 }
 
 .panel-heading{

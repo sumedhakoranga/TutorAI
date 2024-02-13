@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 @Component({
   selector: 'app-root',
@@ -13,8 +14,20 @@ export class AppComponent {
   constructor(private router: Router){
     this.router.events.subscribe((event:any)=>{
       if(event instanceof NavigationEnd){
-        this.showHeaderFooter = !(event.url === '/access-account' || event.url === '/login' || event.url === '/signup' || event.url === '/courses' || event.url === '/progress' || event.url === '/profile' || event.url === '/teachers' || event.url === '/mathematics' || event.url === '/science' || event.url === '/english' || event.url === '/socialscience' || event.url === '/comprehension');
+        this.showHeaderFooter = !(event.url === '/access-account' || event.url === '/learner/login' || event.url === '/learner/signup' || event.url === '/courses' || event.url === '/progress' || event.url === '/profile' || event.url === '/teachers' || event.url === '/mathematics' || event.url === '/science' || event.url === '/english' || event.url === '/socialscience' || event.url === '/comprehension');
       }
+    });
+  }
+
+  //logout
+
+  logout() {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      console.log('User signed out');
+      this.router.navigate(['/intro-page']);
+    }).catch((error) => {
+      console.error("logout error");
     });
   }
 

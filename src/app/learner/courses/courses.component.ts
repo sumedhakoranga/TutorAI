@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 
 export class CoursesComponent implements OnInit {
 
+  isLoading = true;
+
   constructor(private router: Router) { }
 
   courses: any[] = [];
@@ -18,8 +20,15 @@ export class CoursesComponent implements OnInit {
   courseMapping: any = {};
 
   ngOnInit() {
+    this.loadData();
     this.getUserInfo();
     this.fetchCourses();
+  }
+
+  loadData() {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2000);
   }
 
   getUserInfo() {
@@ -58,18 +67,6 @@ export class CoursesComponent implements OnInit {
       console.log(this.courseMapping);
     }, {
       onlyOnce: true
-    });
-  }
-
-  //logout
-
-  logout(){
-    const auth = getAuth();
-    signOut(auth).then(()=>{
-      console.log('User signed out');
-      this.router.navigate(['/intro-page']);
-    }).catch((error)=>{
-      console.error("logout error");
     });
   }
  
