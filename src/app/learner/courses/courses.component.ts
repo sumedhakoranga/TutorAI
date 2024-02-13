@@ -37,12 +37,10 @@ export class CoursesComponent implements OnInit {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const userId = user.uid;
-        console.log(userId);
         const db = getDatabase();
         onValue(ref(db, '/learners/' + userId), (snapshot) => {
           this.username = snapshot.val().username || 'Anonymous';
           this.courses = snapshot.val().courses || [];
-          console.log(this.courses);
         }, {
           onlyOnce: true
         });
@@ -64,11 +62,12 @@ export class CoursesComponent implements OnInit {
           .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
           .join(" ");
       });
-      console.log(this.courseMapping);
     }, {
       onlyOnce: true
     });
   }
+
+
  
 }
 

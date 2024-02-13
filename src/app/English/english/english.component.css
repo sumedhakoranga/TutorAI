@@ -1,55 +1,91 @@
+/* Container and Layout */
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
 .quiz-container {
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 30px;
-  background: #f9f9f9;
+  background-color: #fff;
+  padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Headers and Text */
+.display-5 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.fs-4 {
+  font-size: 1.25rem;
+}
+
+/* Progress Bar */
+.progress {
+  height: 20px;
+}
+
+.progress-bar {
+  transition: width 0.6s ease;
+}
+
+/* Questions and Choices */
+.quiz-question {
+  margin-bottom: 20px;
 }
 
 .quiz-header {
-  margin-bottom: 2rem;
-  color: #343a40;
-  font-size: 2rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  margin-bottom: 30px;
 }
 
-.quiz-question h2 {
-  color: #5d1049;
-  margin-bottom: 1rem;
+/* Buttons */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
 }
 
-.quiz-question p {
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-lg {
+  padding: .5rem 1rem;
   font-size: 1.25rem;
-  margin-bottom: 1.5rem;
-}
-
-.quiz-answer {
-  margin-bottom: 1rem;
-}
-
-.quiz-answer input[type="radio"] {
-  margin-right: 0.5rem;
-  cursor: pointer;
-}
-
-.quiz-answer label {
-  cursor: pointer;
-  font-size: 1.1rem;
+  border-radius: .3rem;
 }
 
 .submit-btn {
-  width: 100%;
-  padding: 10px 0;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
+  margin-top: 20px;
 }
 
+/* Feedback */
+.feedback p {
+  color: #28a745;
+  /* Green for positive feedback */
+  font-weight: bold;
+}
+
+/* Util classes */
+.text-center {
+  text-align: center;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  margin: 5px;
+}
+
+.multichoice input[type="radio"] {
+  margin-right: 10px;
+}
 
 .scoreTemp {
   padding: 20px;
@@ -68,24 +104,4 @@
   font-size: 2.5rem;
   color: #4caf50;
   margin-bottom: 1rem;
-}
-
-.scoreTemp .btn-primary {
-  font-size: 1rem;
-  padding: 10px 30px;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: white;
-  text-transform: uppercase;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  border: none;
-  transition: background-color 0.3s;
-}
-
-.scoreTemp .btn-primary:hover {
-  background-color: #0056b3;
-}
-
-.scoreTemp .btn-primary:hover {
-  background-color: #218838;
 }

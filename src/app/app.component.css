@@ -2,20 +2,28 @@
   background-color: #5e8d83;
 }
 
-.navbar-center-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.logo-text{
+  margin-left:12px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: xx-large;
+  font-weight: 900;
 }
 
-.nav-logo {
-  width: auto;
-  height: 50px;
-  max-width: 100%;
+.nav-logo{
+  margin-bottom: 6px;;
 }
 
-@media (max-width: 768px) {
-  .nav-logo {
-    height: 40px;
-  }
+.navbar-collapse{
+  font-size: larger;
+}
+
+.main-page {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  vertical-align: middle;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: xx-large;
+  font-weight: 900;
 }
