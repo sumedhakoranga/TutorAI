@@ -32,6 +32,7 @@ import { EnglishComponent } from './English/english/english.component';
 import { SocialscienceComponent } from './socialscience/socialscience.component';
 import { ComprehensionComponent } from './English/comprehension/comprehension.component';
 import { CheckemailComponent } from './checkemail/checkemail.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { CheckemailComponent } from './checkemail/checkemail.component';
     SocialscienceComponent,
     ComprehensionComponent,
     CheckemailComponent,
+    AboutusComponent,
   ],
   imports: [
     BrowserModule,

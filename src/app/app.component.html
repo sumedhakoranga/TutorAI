@@ -12,24 +12,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!isLoggedIn">
           <a class="nav-link active" aria-current="page" role="button" routerLink="/access-account">Sign Up</a>
         </li>
+        <!-- Toggle between Login and Logout based on isLoggedIn status -->
+        <li *ngIf="isLoggedIn"><a href="#" routerLink="/courses" class="nav-link px-2 link-dark">courses</a></li>
+        <li *ngIf="!isLoggedIn"><a href="#" routerLink="/learner/login" class="nav-link px-2 link-dark">Login</a></li>
+        <li *ngIf="isLoggedIn"><a href="#" (click)="logout()" class="nav-link px-2 link-dark">Logout</a></li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" routerLink="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            courses
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" routerLink="/">Action</a></li>
-            <li><a class="dropdown-item" routerLink="/">Another action</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" routerLink="/">Something else here</a></li>
-          </ul>
+          <a class="nav-link active" aria-current="page" role="button" routerLink="/aboutus">about us</a>
         </li>
-        <li><a href="#" (click)="logout()" class="nav-link px-2 link-dark">logout</a></li>
       </ul>
     </div>
   </div>

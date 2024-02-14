@@ -1,31 +1,3 @@
-<!-- <div class="container quiz-container" *ngIf="!showScore; else scoreTemplate">
-  <h2 class="quiz-header">Comprehension Quiz</h2>
-  <form>
-    <div class="quiz-question" *ngIf="comprehensionQuestions.length > 0; else loading">
-      <h2>Question:</h2>
-      <p>{{ comprehensionQuestions[currentQuestionIndex].question }}</p>
-      <h2>Answer:</h2>
-      <div class="quiz-answer" *ngFor="let choice of comprehensionQuestions[currentQuestionIndex].choices; let i = index">
-        <input type="radio" [id]="'choice' + i" name="answer" [(ngModel)]="selectedAnswer" [value]="i">
-        <label [for]="'choice' + i">{{ choice }}</label>
-      </div>
-    </div>
-
-    <ng-template #loading>
-      <p>Loading questions...</p>
-    </ng-template>
-
-    <button type="button" class="btn btn-primary submit-btn" (click)="checkAnswer()">
-      {{ currentQuestionIndex < comprehensionQuestions.length - 1 ? 'Next' : 'Submit' }} </button>
-  </form>
-</div>
-<ng-template #scoreTemplate>
-  <div class="scoreTemp">
-    <h2>Your Score: {{ score }}/{{ comprehensionQuestions.length }}</h2>
-    <button class="btn btn-primary" routerLink="/courses">Go to Course Page</button>
-  </div>
-</ng-template> -->
-
 <!-- Introduction Section -->
 <div class="container bg-light py-5" *ngIf="!hasQuizStarted">
   <h1 class="display-5 fw-bold">Welcome to Comprehension Quiz</h1>

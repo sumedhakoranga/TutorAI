@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+ .container {
+   background-color: #fff;
+   padding: 20px;
+   margin-top: 20px;
+   border-radius: 8px;
+   box-shadow: 0 2px 4px rgba(12, 12, 12, 0.1);
+ }
+
+ h1,
+ h3{
+   color: #4c7276;
+   font-family: "Roboto" serif;
+   margin:2%;
+ }
+
+ h1{
+  text-decoration: underline;
+ }
+
+ p {
+   line-height: 1.6;
+   font-family: "Roboto" serif;
+  
+ }

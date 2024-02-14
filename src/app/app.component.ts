@@ -10,22 +10,35 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 export class AppComponent {
   title = 'tutor2';
   showHeaderFooter = false;
+  isLoggedIn=false;
 
   constructor(private router: Router){
     this.router.events.subscribe((event:any)=>{
       if(event instanceof NavigationEnd){
-        this.showHeaderFooter = !(event.url === '/access-account' || event.url === '/learner/login' || event.url === '/learner/signup' || event.url === '/courses' || event.url === '/progress' || event.url === '/profile' || event.url === '/teachers' || event.url === '/mathematics' || event.url === '/science' || event.url === '/english' || event.url === '/socialscience' || event.url === '/comprehension' || event.url === '/checkemail');
+        this.showHeaderFooter = !(event.url === '/access-account' || event.url === '/learner/login' || event.url === '/learner/signup' || event.url === '/courses' || event.url === '/progress' || event.url === '/profile' || event.url === '/teachers' || event.url === '/mathematics' || event.url === '/science' || event.url === '/english' || event.url === '/socialscience' || event.url === '/comprehension' || event.url === '/checkemail' || event.url === '/aboutus');
+      }
+    });
+  }
+
+  ngOnInit() {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in.
+        this.isLoggedIn = true;
+      } else {
+        // User is signed out.
+        this.isLoggedIn = false;
       }
     });
   }
 
   //logout
-
   logout() {
     const auth = getAuth();
     signOut(auth).then(() => {
       console.log('User signed out');
-      this.router.navigate(['/intro-page']);
+      this.router.navigate(['/']);
     }).catch((error) => {
       console.error("logout error");
     });
