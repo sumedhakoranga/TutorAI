@@ -13,7 +13,7 @@ export class CoursesComponent implements OnInit {
 
   availableCourses: string[] = ['mathematics', 'science', 'english', 'socialScience'];
   courseSelections: { [key: string]: boolean } = {};
-
+  isLoggedIn = false;
   isLoading = true;
 
   constructor(private router: Router) { }
@@ -44,15 +44,27 @@ export class CoursesComponent implements OnInit {
       if (user) {
         const userId = user.uid;
         const db = getDatabase();
-        onValue(ref(db, '/learners/' + userId), (snapshot) => {
-          this.username = snapshot.val().username || 'Anonymous';
-          this.courses = snapshot.val().courses || [];
+        const userRef = ref(db, '/learners/' + userId);
+        onValue(userRef, (snapshot) => {
+          if (snapshot.exists()) {
+            const userData = snapshot.val();
+            this.username = userData.username || 'Anonymous';
+            this.courses = userData.courses || [];
+            this.isLoggedIn = true; // User is logged in and registered
+          } else {
+            // No user data found, might indicate user is not fully registered
+            this.isLoggedIn = false; // Adjust based on how you want to handle this case
+            console.log("User is logged in but not registered.");
+            // Optionally redirect to a registration page or display a message
+            // this.router.navigate(['/register']);
+          }
         }, {
           onlyOnce: true
         });
-
       } else {
-        this.router.navigate(['/home']);
+        // User is not logged in
+        this.isLoggedIn = false;
+        this.router.navigate(['/login']);
       }
     });
 

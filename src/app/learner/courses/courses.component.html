@@ -1,4 +1,10 @@
-<div class="courses_component">
+<div *ngIf="!isLoggedIn" class="alert alert-warning custom-alert" role="alert">
+  <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+  Please <a routerLink="/learner/login" class="alert-link">login</a> or 
+  <a routerLink="/learner/signup" class="alert-link">register</a> to access the courses. 
+</div>
+
+<div *ngIf="isLoggedIn" class="courses_component">
   <header class="p-3 mb-3 border-bottom bg-color light">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">

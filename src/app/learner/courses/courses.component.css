@@ -88,3 +88,13 @@
   color:ce4444;
 }
 
+.custom-alert {
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+  color: #856404;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 18%;
+}
+
+
