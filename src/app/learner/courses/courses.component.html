@@ -78,26 +78,18 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <div class="styled-checkbox m-2">
-                        <input type="checkbox" id="mathematics">
-                        <label for="mathematics">Mathematics</label>
-                      </div>
-                      <div class="styled-checkbox m-2">
-                        <input type="checkbox" id="science">
-                        <label for="science">Science</label>
-                      </div>
-                      <div class="styled-checkbox m-2">
-                        <input type="checkbox" id="english">
-                        <label for="english">English</label>
-                      </div>
-                      <div class="styled-checkbox m-2">
-                        <input type="checkbox" id="socialScience">
-                        <label for="socialScience">Social Science</label>
+                      <div class="modal-body">
+                        <div class="styled-checkbox m-2" *ngFor="let course of availableCourses">
+                          <input type="checkbox" [id]="course" [(ngModel)]="courseSelections[course]">
+                          <label [for]="course">{{ courseMapping[course] }}</label>
+                        </div>
                       </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
+                      <button type="button" class="btn btn-primary" (click)="saveCourseSelections()"
+                        data-bs-dismiss="modal">Save
+                        changes</button>
                     </div>
                   </div>
                 </div>
@@ -116,7 +108,7 @@
                   <div class="card-body">
                     <h5 class="card-title">{{ courseMapping[course] }}</h5>
                     <p class="card-text">Let's dive into the fun quizes!!!!</p>
-                    <a routerLink="/socialscience" class="stretched-link"></a>
+                    <a routerLink="/mathematics" class="stretched-link"></a>
                   </div>
                   <div class="card-footer bg-transparent border-0 text-muted">
                     <span class="proceed-arrow">Proceed <i class="fa fa-arrow-right"></i></span>

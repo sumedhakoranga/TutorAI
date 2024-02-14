@@ -16,6 +16,8 @@ export class SignupComponent implements OnInit {
   isText: boolean = false;
   eyeIcon: string = "fa-eye-slash";
   signUpForm!: FormGroup;
+  isLoading = false;
+  feedbackMessage = '';
 
   constructor(private fb: FormBuilder, private auth: AngularFireAuth, private router: Router) { }
 
@@ -36,30 +38,68 @@ export class SignupComponent implements OnInit {
     this.isText ? this.type = "text" : this.type = "password";
   }
 
+  // onSignUp() {
+  //   if (this.signUpForm.valid) {
+  //     const { email, password, username, } = this.signUpForm.value;
+  //     this.auth.createUserWithEmailAndPassword(email, password)
+  //       .then(userCredential => {
+  //         // Handle successful signup
+  //         const user = userCredential.user;
+  //         if (user) {
+  //           const uid = user.uid;
+  //           const db = getDatabase();
+  //           set(ref(db, 'users/' + uid), {       
+  //             type: 'learners'
+  //           });
+  //           set(ref(db, 'learners/' + uid), {
+  //             username: username,
+  //             email: email
+  //           });
+  //           this.router.navigate(['/courses']);
+  //         } else {
+  //           this.router.navigate(['/home']);
+  //         }
+  //       })
+  //       .catch(error => {
+  //         // Handle errors
+  //         console.error(error);
+  //       });
+  //   } else {
+  //     this.validateALLFormFields(this.signUpForm);
+  //     alert("Your form is invalid");
+  //   }
+  // }
+
   onSignUp() {
     if (this.signUpForm.valid) {
-      const { email, password, username, } = this.signUpForm.value;
+      this.isLoading = true;
+      const { email, password, username } = this.signUpForm.value;
       this.auth.createUserWithEmailAndPassword(email, password)
         .then(userCredential => {
           // Handle successful signup
           const user = userCredential.user;
           if (user) {
-            const uid = user.uid;
-            const db = getDatabase();
-            set(ref(db, 'users/' + uid), {       
-              type: 'learners'
-            });
-            set(ref(db, 'learners/' + uid), {
-              username: username,
-              email: email
-            });
-            this.router.navigate(['/courses']);
+            user.sendEmailVerification()
+              .then(() => {
+                const uid = user.uid;
+                const db = getDatabase();
+                set(ref(db, 'users/' + uid), {
+                  type: 'learners'
+                });
+                set(ref(db, 'learners/' + uid), {
+                  username: username,
+                  email: email
+                });
+                this.router.navigate(['/checkemail']);
+              })
+              .catch(error => {
+                console.error('Error sending verification email', error);
+              });
           } else {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/']);
           }
         })
         .catch(error => {
-          // Handle errors
           console.error(error);
         });
     } else {
@@ -67,6 +107,7 @@ export class SignupComponent implements OnInit {
       alert("Your form is invalid");
     }
   }
+
 
 
   private validateALLFormFields(formGroup: FormGroup) {

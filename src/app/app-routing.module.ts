@@ -13,8 +13,10 @@ import { EnglishComponent } from './English/english/english.component';
 import { SocialscienceComponent } from './socialscience/socialscience.component';
 import { ComprehensionComponent } from './English/comprehension/comprehension.component';
 import { IntroComponent } from './intro-page/intro/intro.component';
+import { CheckemailComponent } from './checkemail/checkemail.component';
 
 const routes: Routes = [
+  { path: 'checkemail', component: CheckemailComponent },
   { path: 'intro-page/intro', component: IntroComponent },
   { path: 'access-account', component: AccessAccountComponent },
   { path: 'learner/login', component: LoginComponent },
