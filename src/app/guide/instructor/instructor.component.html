@@ -1,0 +1,221 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between">
+    <h4>Welcome, kamla koranga</h4>
+    <a href="#" class="text-success" data-bs-toggle="modal" data-bs-target="#addSchoolModal">
+      Add your school <i class="fa-solid fa-pen-nib"></i>
+    </a>
+
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="addSchoolModal" tabindex="-1" aria-labelledby="addSchoolModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addSchoolModalLabel">Add your school</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <h4>Where do you teach?</h4>
+            <div class="form-group">
+              <label for="country">Country</label>
+              <select class="form-control" id="country">
+                <option>India</option>
+                <option>Canada</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="state">State</label>
+              <input type="text" class="form-control" id="state" placeholder="e.g., Maharashtra">
+            </div>
+            <div class="form-group">
+              <label for="district">District</label>
+              <input type="text" class="form-control" id="district" placeholder="e.g., PUNE">
+            </div>
+            <div class="form-group">
+              <label for="block">Block</label>
+              <input type="text" class="form-control" id="block" placeholder="e.g., PURANDAR">
+            </div>
+            <div class="form-group">
+              <label for="school">School</label>
+              <input type="text" class="form-control" id="school" placeholder="e.g., Centerville School">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Skip</button>
+          <button type="button" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="classes-tab" data-bs-toggle="tab" data-bs-target="#classes" type="button"
+        role="tab" aria-controls="classes" aria-selected="true">Classes</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="students-tab" data-bs-toggle="tab" data-bs-target="#students" type="button"
+        role="tab" aria-controls="students" aria-selected="false">Students</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="resources-tab" data-bs-toggle="tab" data-bs-target="#resources" type="button"
+        role="tab" aria-controls="resources" aria-selected="false">Resources</button>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane active" id="classes" role="tabpanel" aria-labelledby="classes-tab">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>Your classes</h4>
+        <button type="button" class="btn btn-secondary">Add new class</button>
+      </div>
+      <div class="d-flex justify-content-between">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Your class</h5>
+            <p class="card-text">Courses: Class 1</p>
+            <p class="card-text">Students: 0 students</p>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStudentsModal">
+              Add students
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="addStudentsModal" tabindex="-1" aria-labelledby="addStudentsModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="addStudentsModalLabel">How would you like to add your students?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="card student-card">
+                          <div class="card-body student-card-body text-center">
+                            <a href="https://edu.google.com/workspace-for-education/classroom/" target="_blank"
+                              class="btn btn-primary mb-3">Invite your Google Classroom</a>
+                            <p class="card-text">The fastest, easiest way to invite your students.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam non perspiciatis
+                      consectetur laudantium fugiat accusantium atque, odio aliquam harum modi.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="students" role="tabpanel" aria-labelledby="students-tab">
+      <h4 py-5>Your students (0)</h4>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">STUDENT NAME</th>
+              <th scope="col">USERNAME / EMAIL</th>
+              <th scope="col">CLASS</th>
+              <th scope="col">ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="4" class="text-center">You don't have any students.</td>
+            </tr>
+            <!-- Student rows -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
+
+    <div class="tab-pane fade" id="resources" role="tabpanel" aria-labelledby="resources-tab">
+
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div>
+            <h3>Recommended videos</h3>
+            <div class="row">
+              <!-- Video card 1 -->
+              <div class="col-md-6 mb-3">
+                <div class="card">
+                  <iframe width="100%" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                  <div class="card-body">
+                    <h5 class="card-title">Differentiation and remediation</h5>
+                    <p class="card-text">Classroom insights</p>
+                    <span class="badge bg-secondary">3:19</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Video card 2 -->
+              <div class="col-md-6 mb-3">
+                <div class="card">
+                  <iframe width="100%" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                  <div class="card-body">
+                    <h5 class="card-title">Differentiation and remediation</h5>
+                    <p class="card-text">Classroom insights</p>
+                    <span class="badge bg-secondary">3:19</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Video card 3 -->
+              <div class="col-md-6 mb-3">
+                <div class="card">
+                  <iframe width="100%" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                  <div class="card-body">
+                    <h5 class="card-title">Differentiation and remediation</h5>
+                    <p class="card-text">Classroom insights</p>
+                    <span class="badge bg-secondary">3:19</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Video card 4 -->
+              <div class="col-md-6 mb-3">
+                <div class="card">
+                  <iframe width="100%" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                  <div class="card-body">
+                    <h5 class="card-title">Differentiation and remediation</h5>
+                    <p class="card-text">Classroom insights</p>
+                    <span class="badge bg-secondary">3:19</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

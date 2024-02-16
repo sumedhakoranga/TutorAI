@@ -1,3 +1,86 @@
-.profile_component {
-  padding: 0% 0% 50% 0%;
+/* .profile_component {
+  padding: 0% 0% 30% 0%;
+} */
+
+.dashboard{
+  margin-top:-40px;
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 240px;
+  height:240px;
+  perspective: 1000px;
+  margin: auto;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flip-card-front {
+  background-color: #DAA520;
+  border-radius: 80px 10px;
+}
+
+.flip-card-front img {
+  width: 46%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.flip-card-back {
+  background-color: #072d58;
+  color: white;
+  transform: rotateY(180deg);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.flip-card-back p {
+  font-size: 1em;
+}
+
+.badge-count {
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 0.25em 0.5em;
+  border-radius: 10px;
+  font-size: 0.8em;
+  margin-left: 0.5em;
+}
+
+.card-title{
+  color:white;
+}
+
+.dashboard .row .col {
+  border-right: 2px dashed #ccc;
+}
+
+.badge-progress{
+  text-align: center;
+  margin-top: -5px;
+  margin-bottom: 16px;
 }

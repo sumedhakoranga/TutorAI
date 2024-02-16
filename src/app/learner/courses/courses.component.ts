@@ -50,13 +50,10 @@ export class CoursesComponent implements OnInit {
             const userData = snapshot.val();
             this.username = userData.username || 'Anonymous';
             this.courses = userData.courses || [];
-            this.isLoggedIn = true; // User is logged in and registered
+            this.isLoggedIn = true;
           } else {
-            // No user data found, might indicate user is not fully registered
-            this.isLoggedIn = false; // Adjust based on how you want to handle this case
+            this.isLoggedIn = false;
             console.log("User is logged in but not registered.");
-            // Optionally redirect to a registration page or display a message
-            // this.router.navigate(['/register']);
           }
         }, {
           onlyOnce: true

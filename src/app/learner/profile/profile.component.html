@@ -1,52 +1,75 @@
 <div class="profile_component">
-<header class="p-3 mb-3 border-bottom bg-color light">
+  <header class="p-3 mb-3 border-bottom bg-color light">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <button class="border-0 bg-primary px-2 mx-2 rounded">Your EXP
+          <span class="fa fa-bolt"></span>
+        </button>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a routerLink="/courses" class="nav-link px-2 link-dark">Courses</a></li>
+          <li><a routerLink="/courses" class="nav-link px-2 link-dark">Practice</a></li>
+          <li><a routerLink="/courses" class="nav-link px-2 link-dark">Resources</a></li>
+        </ul>
+
+        <p class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 text-center">{{username}}</p>
+
+        <div class="user_profile">
+          <a routerLink="/" class="text-decoration-none" id="user">
+            <img src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
+              alt="image" width="32" height="32" class="rounded-circle">
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
   <div class="container">
-    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-      <button class="border-0 bg-primary px-2 mx-2 rounded">Your EXP
-        <span class="fa fa-bolt"></span>
-      </button>
+    <div class="row">
+      <div class="col-sm-12 col-md-2 nav_content mt-0">
+        <main class="container">
+          <nav id="navbar">
+            <section class="mt-4 text-center">
+              <h5 class="">My Stuff</h5>
+              <ul class="list-unstyled">
+                <li><a class="nav-link my-3 p-3" routerLink="/courses">Courses</a></li>
+              </ul>
+            </section>
+            <section class="text-center">
+              <h5>My Account</h5>
+              <ul class="list-unstyled">
+                <li><a class="nav-link my-3 p-3" routerLink="/progress">Progress</a></li>
+                <li><a class="nav-link my-3 p-3" routerLink="/Profile">Profile</a></li>
+                <li><a class="nav-link my-3 p-3" routerLink="/teachers">Teachers</a></li>
+              </ul>
+            </section>
+          </nav>
+        </main>
 
-      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a routerLink="/courses" class="nav-link px-2 link-dark">Courses</a></li>
-        <li><a routerLink="/courses" class="nav-link px-2 link-dark">Practice</a></li>
-        <li><a routerLink="/courses" class="nav-link px-2 link-dark">Resources</a></li>
-      </ul>
+      </div>
 
-      <p class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 text-center">username</p>
-
-      <div class="user_profile">
-        <a routerLink="/" class="text-decoration-none" id="user">
-          <img src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
-            alt="image" width="32" height="32" class="rounded-circle">
-        </a>
+      <div class="col-sm-12 col-md-10 dashboard">
+        <div class="container py-5">
+          <h1 class="badge-progress">🏆Badge Count🏆</h1>
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col" *ngFor="let badge of badges">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img class="badge-image" [src]="badge.image" [alt]="badge.name" >
+                    <h5 class="card-title">{{ badge.name }} <span class="badge-count">[{{ badge.count }}] 🏆</span></h5>
+                  </div>
+                  <div class="flip-card-back">
+                    <p class="card-text">{{ badge.description }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</header>
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12 col-md-2 nav_content mt-0">
-      <main class="container">
-        <nav id="navbar">
-          <section class="mt-4 text-center">
-            <h5 class="">My Stuff</h5>
-            <ul class="list-unstyled">
-              <li><a class="nav-link my-3 p-3" routerLink="/courses">Courses</a></li>
-            </ul>
-          </section>
-          <section class="text-center">
-            <h5>My Account</h5>
-            <ul class="list-unstyled">
-              <li><a class="nav-link my-3 p-3" routerLink="/progress">Progress</a></li>
-              <li><a class="nav-link my-3 p-3" routerLink="/Profile">Profile</a></li>
-              <li><a class="nav-link my-3 p-3" routerLink="/teachers">Teachers</a></li>
-            </ul>
-          </section>
-        </nav>
-      </main>
 
-    </div>
-  </div>
-</div>
 </div>
