@@ -35,6 +35,9 @@ import { CheckemailComponent } from './checkemail/checkemail.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { BadgeComponent } from './badge/badge.component';
 import { InstructorComponent } from './guide/instructor/instructor.component';
+import { InstructorLoginComponent } from './guide/instructor-login/instructor-login.component';
+import { InstructorSignupComponent } from './guide/instructor-signup/instructor-signup.component';
+import { ParentComponent } from './parent/parent.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +64,9 @@ import { InstructorComponent } from './guide/instructor/instructor.component';
     AboutusComponent,
     BadgeComponent,
     InstructorComponent,
+    InstructorLoginComponent,
+    InstructorSignupComponent,
+    ParentComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,56 @@
+<div class="outer">
+  <div class="container">
+    <div class="row">
+      <div class="offset md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
+        <div class="panel border bg-white">
+          <div class="panel-heading">
+            <h3 class="pt-3 font-weight-bold">Login</h3>
+          </div>
+          <div class="panel-body p-3">
+            <form [formGroup]="loginForm">
+              <div class="form-group pt-3">
+                <div class="input-field"
+                  [class.error]="loginForm.controls['username'].dirty && loginForm.hasError('required','username')">
+                  <span class="fa fa-user p-2"></span>
+                  <input formControlName="username" type="text" placeholder="Email">
+                </div>
+              </div>
+              <small *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required','username')"
+                class="text-danger">*Username is required</small>
+              <div class="form-group pt-3">
+                <div class="input-field"
+                  [class.error]="loginForm.controls['password'].dirty && loginForm.hasError('required','password')">
+                  <span class="fa fa-lock p-2"></span>
+                  <input formControlName="password" [type]="type" placeholder="Password">
+                  <span (click)="hideShowPassword()" class="fa {{eyeIcon}}"></span>
+                </div>
+              </div>
+              <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')"
+                class="text-danger">*Password is required</small>
+              <div class="form-inline fr mt-4">
+                <a (click)="promptResetPassword()" id="forget" class="font-weight-bold">Forget Password?</a>
+              </div>
+              <button (click)="onSubmit()" [disabled]="loginForm.invalid" type="submit"
+                class="btn btn-primary btn-block mt-4 w-100">Login</button>
+              <div class="text-center pt-4 text-muted">Don't have an account? <a id="forget"
+                  routerLink="/guide/instructor-signup">Sign Up</a></div>
+            </form>
+          </div>
+          <div class="mx-3 my-2 py-2 bordert">
+            <div class="text-center py-3">
+              <a (click)="loginWithFacebook()" [class.disabled]="isLoggingIn" class="px-2"> <img
+                  src="https://1.img-dpreview.com/files/p/E~C0x0S3571x3571T1200x1200~articles/9215694845/Facebook_Hero.jpeg"
+                  alt="image"></a>
+              <a (click)="loginWithGoogle()" class="px-2"> <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtc4kYHzBys6r84G8N8AYBJJjL53OneV9315mG_5a04g&s"
+                  alt="image"></a>
+              <a (click)="loginWithGithub()" class="px-2"> <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLsneuujTXfTkOczkvd2VQcXFMUhPQXdAcQoodQ1-z4w&s"
+                  alt="image"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

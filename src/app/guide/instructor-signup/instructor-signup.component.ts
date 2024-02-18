@@ -6,12 +6,11 @@ import { getDatabase, ref, set } from "firebase/database";
 
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css'
+  selector: 'app-instructor-signup',
+  templateUrl: './instructor-signup.component.html',
+  styleUrl: './instructor-signup.component.css'
 })
-
-export class SignupComponent implements OnInit {
+export class InstructorSignupComponent implements OnInit {
   type: string = "password";
   isText: boolean = false;
   eyeIcon: string = "fa-eye-slash";
@@ -91,4 +90,3 @@ export class SignupComponent implements OnInit {
   }
 
 }
-
