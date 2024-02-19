@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 
 export class CoursesComponent implements OnInit {
 
-  availableCourses: string[] = ['mathematics', 'science', 'english', 'socialScience'];
   courseSelections: { [key: string]: boolean } = {};
   isLoggedIn = false;
   isLoading = true;
@@ -20,15 +19,18 @@ export class CoursesComponent implements OnInit {
 
   courses: any[] = [];
   username: string = 'Loading...';
-  courseMapping: any = {};
+  availableCourses: any = {};
+  courseName: any = {};
+  availableCourseName: any = {};
 
   ngOnInit() {
-    this.availableCourses.forEach(course => {
-      this.courseSelections[course] = false;
-    });
     this.loadData();
-    this.getUserInfo();
-    this.fetchCourses();
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, (user) => {
+      this.getUserInfo(user);
+      this.fetchCourses();
+    });
   }
 
   loadData() {
@@ -37,10 +39,9 @@ export class CoursesComponent implements OnInit {
     }, 2000);
   }
 
-  getUserInfo() {
-    const auth = getAuth();
-
-    onAuthStateChanged(auth, (user) => {
+  getUserInfo(user:any) {
+    // const auth = getAuth();
+    // onAuthStateChanged(auth, (user) => {
       if (user) {
         const userId = user.uid;
         const db = getDatabase();
@@ -49,7 +50,14 @@ export class CoursesComponent implements OnInit {
           if (snapshot.exists()) {
             const userData = snapshot.val();
             this.username = userData.username || 'Anonymous';
-            this.courses = userData.courses || [];
+            this.courses = Object.keys(userData.courses) || [];
+            this.courseName = this.courses.map((course: string): string => {
+              return course
+                .split("_")
+                .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" ");
+            });
+            console.log(this.courses);
             this.isLoggedIn = true;
           } else {
             this.isLoggedIn = false;
@@ -63,38 +71,63 @@ export class CoursesComponent implements OnInit {
         this.isLoggedIn = false;
         this.router.navigate(['/login']);
       }
-    });
+    // });
 
+  }
+
+  fetchCourses() {
+    const db = getDatabase();
+    onValue(ref(db, '/courses'), (snapshot) => {
+      this.availableCourses = Object.keys(snapshot.val()) || [];
+      this.availableCourseName = this.availableCourses.map((course: string): string => {
+        return course
+          .split("_")
+          .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ");
+      });
+      console.log(this.availableCourses);
+      console.log(this.courseName);
+
+      this.availableCourses.forEach((course: string) => {
+        this.courseSelections[course] = this.courses.includes(course);
+      });
+      console.log(this.courseSelections);
+
+    }, {
+      onlyOnce: true
+    });
   }
 
   // fetchCourses() {
   //   const db = getDatabase();
   //   onValue(ref(db, '/courses'), (snapshot) => {
-  //     this.courseMapping = snapshot.val() || [];
-  //     this.courseMapping = this.courseMapping.map((course: string): string => {
-  //       return course
-  //         .split("_")
-  //         .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
-  //         .join(" ");
-  //     });
+  //     if (snapshot.exists()) {
+  //       const coursesData = snapshot.val();
+  //       console.log(coursesData);
+  //       this.courses = Object.keys(coursesData);
+  //       console.log(this.courses);
+  //     } else {
+  //       console.log("eerror");
+  //     }
   //   }, {
   //     onlyOnce: true
   //   });
   // }
 
-  fetchCourses() {
-    const db = getDatabase();
-    onValue(ref(db, '/courses'), (snapshot) => {
-      const coursesData = snapshot.val() || {};
-      this.courseMapping = {};
-      Object.keys(coursesData).forEach((key) => {
-        this.courseMapping[key] = coursesData[key];
-      });
-      this.availableCourses = Object.keys(this.courseMapping);
-    }, {
-      onlyOnce: true
-    });
-  }
+  // fetchCourses() {
+  //   const db = getDatabase();
+  //   onValue(ref(db, '/courses'), (snapshot) => {
+  //     const coursesData = snapshot.val() || {};
+  //     this.availableCourses = {};
+  //     Object.keys(coursesData).forEach((key) => {
+  //       this.availableCourses[key] = coursesData[key];
+  //     });
+  //     this.availableCourses = Object.keys(this.availableCourses);
+  //   }, {
+  //     onlyOnce: true
+  //   });
+  // }
+
 
 
   saveCourseSelections() {
@@ -105,12 +138,13 @@ export class CoursesComponent implements OnInit {
       // Filter selected courses
       const selectedCourses = Object.keys(this.courseSelections).filter(key => this.courseSelections[key]);
       const updates: { [key: string]: any } = {};
-      updates['/learners/' + user.uid + '/courses'] = selectedCourses;
-      update(ref(db), updates).then(() => {
-        this.courses = selectedCourses;
-      }).catch(error => {
-        console.error("Error updating courses: ", error);
-      });
+      console.log(selectedCourses);
+      // updates['/learners/' + user.uid + '/courses'] = selectedCourses;
+      // update(ref(db), updates).then(() => {
+      //   this.courses = selectedCourses;
+      // }).catch(error => {
+      //   console.error("Error updating courses: ", error);
+      // });
     }
   }
 

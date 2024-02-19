@@ -1,7 +1,9 @@
+// declare var require: any
 import { Component, OnInit } from '@angular/core';
 import { getDatabase, ref, onValue } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Router } from '@angular/router';
+import axios from 'axios';
 
 @Component({
   selector: 'app-mathematics',
@@ -12,24 +14,31 @@ export class MathematicsComponent implements OnInit {
   hasQuizStarted = false;
   mathQuestions: any = [];
   username: string;
-  currentQuestionIndex: number = 0;
+  currentQuestionCount: number = 0;
+  totalQuestionCount: number = 5;
   score = 0;
   selectedAnswer: string;
   showScore = false;
   alertVisible = false;
   currentAnswerCorrect: boolean | null = null;
   answerFeedback: string = '';
+  userId : string = '';
+  question : any;
+  questionFetched = false;
 
   constructor(private router: Router) { }
 
 
   startQuiz() {
     this.hasQuizStarted = true;
-    this.loadQuestions();
+    this.loadQuestion();
+    this.score = 0;
+    this.currentQuestionCount = 0;
+    this.showScore = false;
   }
 
   getProgress(): string {
-    const progress = ((this.currentQuestionIndex + 1) / this.mathQuestions.length) * 100;
+    const progress = ((this.currentQuestionCount + 1) / this.totalQuestionCount) * 100;
     return `${progress}%`;
   }
 
@@ -38,7 +47,6 @@ export class MathematicsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserInfo();
-    // this.loadQuestions();
   }
 
   getUserInfo() {
@@ -46,10 +54,9 @@ export class MathematicsComponent implements OnInit {
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const userId = user.uid;
-        console.log(userId);
+        this.userId = user.uid;
         const db = getDatabase();
-        onValue(ref(db, '/learners/' + userId), (snapshot) => {
+        onValue(ref(db, '/learners/' + this.userId), (snapshot) => {
           this.username = snapshot.val().username || 'Anonymous';
         }, {
           onlyOnce: true
@@ -62,18 +69,33 @@ export class MathematicsComponent implements OnInit {
 
   }
 
-  loadQuestions() {
-    const db = getDatabase();
-    onValue(ref(db, '/questions/mathematics'), (snapshot) => {
-      let questions = Object.values(snapshot.val() || {});
-      questions = this.shuffleArray(questions);
-      this.mathQuestions = questions.slice(0, 5);
-      this.currentQuestionIndex = 0;
-      this.showScore = false;
-      this.score = 0;
-    }, {
-      onlyOnce: true
-    });
+  loadQuestion() {
+    const data = {
+      task: 'get_question',
+      learner_id: this.userId,
+      course: 'mathematics'
+    };
+
+    // Making the POST request
+    axios.post('https://us-central1-tutorai00411.cloudfunctions.net/kt_ai', data)
+      .then((response:any) => {
+        let question_id = response.data.question_id;
+        // let skill = response.data.skill;
+        const db = getDatabase();
+        onValue(ref(db, '/questions/mathematics/'+question_id), (snapshot) => {
+          this.question = snapshot.val();
+          this.questionFetched = true;
+          console.log(this.question);
+        }, {
+          onlyOnce: true
+        });
+        console.log(response.data);
+      })
+      .catch((error:any) => {
+        console.error(error);
+      });
+
+    
   }
 
 
@@ -87,52 +109,80 @@ export class MathematicsComponent implements OnInit {
 
 
   nextQuestion() {
-    this.checkAnswer();
-    if (this.currentQuestionIndex < this.mathQuestions.length - 1) {
-      this.currentQuestionIndex++;
+    this.questionFetched = false;
+    if (this.currentQuestionCount < this.totalQuestionCount - 1) {
+      this.currentQuestionCount++;
       this.selectedAnswer = '';
+      this.loadQuestion();
     } else {
       this.showScore = true;
     }
   }
 
   checkAnswer() {
-    const currentQuestion = this.mathQuestions[this.currentQuestionIndex];
-    if (this.selectedAnswer.trim().toLowerCase() === currentQuestion.answer.trim().toLowerCase()) {
+    let result = this.selectedAnswer.trim().toLowerCase() === this.question.answer.trim().toLowerCase();
+    if (result) {
       this.score++;
     }
+    const data = {
+      task: 'update_skill',
+      learner_id: this.userId,
+      course: 'mathematics',
+      skill: this.question.skill,
+      result: result
+    };
+    axios.post('https://us-central1-tutorai00411.cloudfunctions.net/kt_ai', data)
+      .then((response: any) => {
+        console.log(response.data);
+      })
+      .catch((error: any) => {
+        console.error(error);
+      });
   }
 
   submitAnswer() {
-    const currentQuestion = this.mathQuestions[this.currentQuestionIndex];
-    this.currentAnswerCorrect = this.selectedAnswer.trim().toLowerCase() === currentQuestion.answer.trim().toLowerCase();
-
+    this.currentAnswerCorrect = this.selectedAnswer.trim().toLowerCase() === this.question.answer.trim().toLowerCase();
+    // this.checkAnswer();
+    let data = {
+      task: 'update_skill',
+      learner_id: this.userId,
+      course: 'mathematics',
+      skill: this.question.skill,
+      result: 0
+    };
     if (this.currentAnswerCorrect) {
       this.score++;
+      data.result = 1;
       this.answerFeedback = 'Correct! Well done.';
     } else {
-      this.answerFeedback = `Incorrect. The correct answer is: ${currentQuestion.answer}`;
+      this.answerFeedback = `Incorrect. The correct answer is: ${this.question.answer}`;
     }
 
-    // Don't automatically move to the next question
+    axios.post('https://us-central1-tutorai00411.cloudfunctions.net/kt_ai', data)
+      .then((response: any) => {
+        console.log(response.data);
+      })
+      .catch((error: any) => {
+        console.error(error);
+      });
   }
 
-  tryAgain() {
-    // Reset for trying the same question again
-    this.selectedAnswer = '';
-    this.currentAnswerCorrect = null;
-    this.answerFeedback = '';
-  }
+  // tryAgain() {
+  //   // Reset for trying the same question again
+  //   this.selectedAnswer = '';
+  //   this.currentAnswerCorrect = null;
+  //   this.answerFeedback = '';
+  // }
 
-  moveToNextQuestion() {
-    if (this.currentQuestionIndex < this.mathQuestions.length - 1) {
-      this.currentQuestionIndex++;
-      this.selectedAnswer = '';
-      this.currentAnswerCorrect = null;
-      this.answerFeedback = '';
-    } else {
-      this.showScore = true;
-    }
-  }
+  // moveToNextQuestion() {
+  //   if (this.currentQuestionIndex < this.mathQuestions.length - 1) {
+  //     this.currentQuestionIndex++;
+  //     this.selectedAnswer = '';
+  //     this.currentAnswerCorrect = null;
+  //     this.answerFeedback = '';
+  //   } else {
+  //     this.showScore = true;
+  //   }
+  // }
 
 }

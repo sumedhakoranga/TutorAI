@@ -10,7 +10,7 @@ import { AccessAccountComponent } from './access-account/access-account.componen
 import { MathematicsComponent } from './mathematics/mathematics.component';
 import { ScienceComponent } from './science/science.component';
 import { EnglishComponent } from './English/english/english.component';
-import { SocialscienceComponent } from './socialscience/socialscience.component';
+import { SocialscienceComponent } from './social_science/socialscience.component';
 import { ComprehensionComponent } from './English/comprehension/comprehension.component';
 import { IntroComponent } from './intro-page/intro/intro.component';
 import { CheckemailComponent } from './checkemail/checkemail.component';
@@ -35,7 +35,7 @@ const routes: Routes = [
   { path: 'science', component: ScienceComponent },
   { path: 'english', component: EnglishComponent },
   { path: 'comprehension', component: ComprehensionComponent },
-  { path: 'socialscience', component: SocialscienceComponent },
+  { path: 'social_science', component: SocialscienceComponent },
   { path: 'courses', component: CoursesComponent },
   { path: 'progress', component: ProgressComponent },
   { path: 'profile', component: ProfileComponent },

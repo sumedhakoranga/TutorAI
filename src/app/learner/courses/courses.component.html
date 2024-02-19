@@ -71,11 +71,11 @@
             </div>
             <div class="col-auto">
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Edit Course
-              </button>
+              </button> -->
               <!-- Modal -->
-              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+              <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -85,9 +85,9 @@
                     </div>
                     <div class="modal-body">
                       <div class="modal-body">
-                        <div class="styled-checkbox m-2" *ngFor="let course of availableCourses">
+                        <div class="styled-checkbox m-2" *ngFor="let course of availableCourses; index as i">
                           <input type="checkbox" [id]="course" [(ngModel)]="courseSelections[course]">
-                          <label [for]="course">{{ courseMapping[course] }}</label>
+                          <label [for]="course">{{ availableCourseName[i] }}</label>
                         </div>
                       </div>
                     </div>
@@ -99,7 +99,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
 
 
@@ -109,12 +109,12 @@
           <div class="col-sm-12 col-md-10 dashboard">
             <div class="row">
               <h5 class="py-3 ouruser">Welcome, {{ username }}</h5>
-              <div class="col-md-4 mb-4" *ngFor="let course of courses">
+              <div class="col-md-4 mb-4" *ngFor="let course of courses; index as i">
                 <div class="card course-card">
                   <div class="card-body">
-                    <h5 class="card-title">{{ courseMapping[course] }}</h5>
+                    <h5 class="card-title">{{ courseName[i] }}</h5>
                     <p class="card-text">Let's dive into the fun quizes!!!!</p>
-                    <a routerLink="/mathematics" class="stretched-link"></a>
+                    <a routerLink="/{{course}}" class="stretched-link"></a>
                   </div>
                   <div class="card-footer bg-transparent border-0 text-muted">
                     <span class="proceed-arrow">Proceed <i class="fa fa-arrow-right"></i></span>

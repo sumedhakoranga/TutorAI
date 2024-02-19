@@ -20,14 +20,14 @@
   </div>
   <h2 class="quiz-header">Mathematics Quiz</h2>
   <div *ngIf="showScore">
-    <h2>Your Score: {{score}}/{{mathQuestions.length}}</h2>
+    <h2>Your Score: {{score}}/{{totalQuestionCount}}</h2>
     <button routerLink="/courses" class="btn btn-primary">Go Home</button>
   </div>
   <div *ngIf="!showScore">
     <form (submit)="submitAnswer() ; $event.preventDefault()">
-      <div class="quiz-question" *ngIf="mathQuestions.length > 0; else loading">
-        <h2>Question {{currentQuestionIndex + 1}}:</h2>
-        <p>{{ mathQuestions[currentQuestionIndex].question }}</p>
+      <div class="quiz-question" *ngIf="questionFetched; else loading">
+        <h2>Question {{currentQuestionCount + 1}}:</h2>
+        <p>{{ question.question }}</p>
         <div class="form-group quiz-answer">
           <label for="userAnswer">Your Answer:</label>
           <textarea class="form-control" id="userAnswer" [(ngModel)]="selectedAnswer" name="selectedAnswer" rows="2"
@@ -37,8 +37,8 @@
       <button type="submit" class="btn btn-primary submit-btn" [disabled]="!selectedAnswer">Next</button>
       <div *ngIf="currentAnswerCorrect !== null">
         <p>{{ answerFeedback }}</p>
-        <button *ngIf="!currentAnswerCorrect" class="btn btn-warning" (click)="tryAgain()">Try Again</button>
-        <button class="btn btn-success m-2" (click)="moveToNextQuestion()">Next Question</button>
+        <!-- <button *ngIf="!currentAnswerCorrect" class="btn btn-warning" (click)="tryAgain()">Try Again</button> -->
+        <button class="btn btn-success m-2" (click)="nextQuestion()">Next Question</button>
       </div>
     </form>
   </div>
