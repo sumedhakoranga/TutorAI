@@ -19,9 +19,10 @@ export class CoursesComponent implements OnInit {
 
   courses: any[] = [];
   username: string = 'Loading...';
-  availableCourses: any = {};
-  courseName: any = {};
-  availableCourseName: any = {};
+  firstname: string = 'Loading...';
+  availableCourses: any[] = [];
+  courseName: any[] = [];
+  availableCourseName: any[] = [];
 
   ngOnInit() {
     this.loadData();
@@ -40,8 +41,6 @@ export class CoursesComponent implements OnInit {
   }
 
   getUserInfo(user:any) {
-    // const auth = getAuth();
-    // onAuthStateChanged(auth, (user) => {
       if (user) {
         const userId = user.uid;
         const db = getDatabase();
@@ -50,14 +49,16 @@ export class CoursesComponent implements OnInit {
           if (snapshot.exists()) {
             const userData = snapshot.val();
             this.username = userData.username || 'Anonymous';
-            this.courses = Object.keys(userData.courses) || [];
-            this.courseName = this.courses.map((course: string): string => {
-              return course
-                .split("_")
-                .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(" ");
-            });
-            console.log(this.courses);
+            this.firstname = userData.firstname || 'Anonymous';
+            if(Object.keys(userData).includes('courses')){
+              this.courses = Object.keys(userData.courses);
+              this.courseName = this.courses.map((course: string): string => {
+                return course
+                  .split("_")
+                  .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+                  .join(" ");
+              });
+            }
             this.isLoggedIn = true;
           } else {
             this.isLoggedIn = false;
@@ -71,8 +72,6 @@ export class CoursesComponent implements OnInit {
         this.isLoggedIn = false;
         this.router.navigate(['/login']);
       }
-    // });
-
   }
 
   fetchCourses() {

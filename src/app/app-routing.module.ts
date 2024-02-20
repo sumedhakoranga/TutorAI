@@ -42,9 +42,6 @@ const routes: Routes = [
   { path: 'progress', component: ProgressComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'teachers', component: TeachersComponent }
-
-
-
 ];
 
 @NgModule({

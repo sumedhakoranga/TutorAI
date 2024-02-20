@@ -8,7 +8,7 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'tutor2';
+  title = 'Tutor.AI';
   showHeaderFooter = false;
   isLoggedIn=false;
 
@@ -26,6 +26,7 @@ export class AppComponent {
       if (user) {
         // User is signed in.
         this.isLoggedIn = true;
+        // this.router.navigate(['/courses']);
       } else {
         // User is signed out.
         this.isLoggedIn = false;
