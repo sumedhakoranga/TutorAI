@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getDatabase, ref, onValue, update } from "firebase/database";
+import { getDatabase, ref, onValue, update, remove } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Router } from '@angular/router';
 
@@ -102,7 +102,7 @@ export class CoursesComponent implements OnInit {
     });
   }
 
-  saveCourseSelections() {
+  enrollCourse() {
     const auth = getAuth();
     const user = auth.currentUser;
     if (user) {
@@ -122,6 +122,20 @@ export class CoursesComponent implements OnInit {
           console.error("Error updating courses: ", error);
         });
       }
+    }
+  }
+
+  unenrollCourse(course: string) {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (user) {
+      const db = getDatabase();
+      remove(ref(db, '/learners/' + this.userId + '/courses/' + course)).then(() => {
+        this.getUserInfo(user);
+        this.fetchCourses();
+      }).catch(error => {
+        console.error("Error updating courses: ", error);
+      });
     }
   }
 }
