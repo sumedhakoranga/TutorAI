@@ -85,8 +85,6 @@ export class ParentSignupComponent implements OnInit {
     }
   }
 
-
-
   private validateALLFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
@@ -98,6 +96,4 @@ export class ParentSignupComponent implements OnInit {
       }
     })
   }
-
 }
-

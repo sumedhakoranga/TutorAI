@@ -35,37 +35,36 @@
     </div>
   </div>
 
-  <div class="modal fade" id="addChildModal" tabindex="-1" aria-labelledby="addChildModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
+  <form [formGroup]="childDataForm">
+    <div class="modal fade" id="addChildModal" tabindex="-1" aria-labelledby="addChildModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
 
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h5 class="modal-title" id="addChildModalLabel">Add a child</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h5 class="modal-title" id="addChildModalLabel">Connect with your kids</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="childUsername">Child's username</label>
+              <input type="text" formControlName="childUsername" class="form-control" id="childUsername"
+                placeholder="example: Test@1234">
+            </div>
+            <div class="form-check mb-3">
+              <input type="checkbox" id="termsCheck">
+              <label class="form-check-label" for="termsCheck">I confirm I confirm that I am this child's parent or
+                legal
+                guardian.</label>
+            </div>
+            <button class="btn btn-success" (click)="onSubmit()" type="submit">Submit</button>
+          </div>
+
         </div>
-
-        <div class="modal-body">
-          <p>Let's create an account for your child.</p>
-          <div class="mb-3">
-            <label for="childUsername">Child's username</label>
-            <input type="text" class="form-control" id="childUsername" placeholder="example: Test@1234">
-          </div>
-          <div class="mb-3">
-            <label for="childPassword">Child password</label>
-            <input type="password" class="form-control" id="childPassword">
-          </div>
-          <div class="form-check mb-3">
-            <input type="checkbox" id="termsCheck">
-            <label class="form-check-label" for="termsCheck">I confirm I confirm that I am this child's parent or legal
-              guardian.</label>
-          </div>
-          <button class="btn btn-success" (click)="onSubmit()" type="submit">Submit</button>
-        </div>
-
       </div>
     </div>
-  </div>
+  </form>
 
   <div *ngFor="let childName of children">
     <div class="card">
