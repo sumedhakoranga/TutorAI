@@ -71,11 +71,11 @@
             </div>
             <div class="col-auto">
               <!-- Button trigger modal -->
-              <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Edit Course
-              </button> -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Enroll
+              </button>
               <!-- Modal -->
-              <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -85,9 +85,10 @@
                     </div>
                     <div class="modal-body">
                       <div class="modal-body">
-                        <div class="styled-checkbox m-2" *ngFor="let course of availableCourses; index as i">
+                        <div class="styled-checkbox m-2" *ngFor="let course of unenrolledCourses; index as i">
                           <input type="checkbox" [id]="course" [(ngModel)]="courseSelections[course]">
-                          <label [for]="course">{{ availableCourseName[i] }}</label>
+                          <!-- <input type="checkbox" [id]="course"> -->
+                          <label [for]="course">{{ unenrolledCourseName[i] }}</label>
                         </div>
                       </div>
                     </div>
@@ -99,7 +100,7 @@
                     </div>
                   </div>
                 </div>
-              </div> -->
+              </div>
 
 
 

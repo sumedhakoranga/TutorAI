@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { getDatabase, ref, onValue, update } from "firebase/database";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 
 export class CoursesComponent implements OnInit {
-
   courseSelections: { [key: string]: boolean } = {};
   isLoggedIn = false;
   isLoading = true;
@@ -18,11 +17,14 @@ export class CoursesComponent implements OnInit {
   constructor(private router: Router) { }
 
   courses: any[] = [];
+  userId: string = '';
   username: string = 'Loading...';
   firstname: string = 'Loading...';
-  availableCourses: any[] = [];
+  allCourses: any[] = [];
   courseName: any[] = [];
-  availableCourseName: any[] = [];
+  allCourseName: any[] = [];
+  unenrolledCourses: any[] = [];
+  unenrolledCourseName: any[] = [];
 
   ngOnInit() {
     this.loadData();
@@ -42,9 +44,9 @@ export class CoursesComponent implements OnInit {
 
   getUserInfo(user:any) {
       if (user) {
-        const userId = user.uid;
+        this.userId = user.uid;
         const db = getDatabase();
-        const userRef = ref(db, '/learners/' + userId);
+        const userRef = ref(db, '/learners/' + this.userId);
         onValue(userRef, (snapshot) => {
           if (snapshot.exists()) {
             const userData = snapshot.val();
@@ -77,78 +79,49 @@ export class CoursesComponent implements OnInit {
   fetchCourses() {
     const db = getDatabase();
     onValue(ref(db, '/courses'), (snapshot) => {
-      this.availableCourses = Object.keys(snapshot.val()) || [];
-      this.availableCourseName = this.availableCourses.map((course: string): string => {
+      this.allCourses = Object.keys(snapshot.val()) || [];
+      this.allCourseName = this.allCourses.map((course: string): string => {
         return course
           .split("_")
           .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
           .join(" ");
       });
-      console.log(this.availableCourses);
-      console.log(this.courseName);
-
-      this.availableCourses.forEach((course: string) => {
+   
+      this.allCourses.forEach((course: string) => {
         this.courseSelections[course] = this.courses.includes(course);
       });
-      console.log(this.courseSelections);
-
+      this.unenrolledCourses = this.allCourses.filter(course => !this.courses.includes(course));
+      this.unenrolledCourseName = this.unenrolledCourses.map((course: string): string => {
+        return course
+          .split("_")
+          .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ");
+      });
     }, {
       onlyOnce: true
     });
   }
-
-  // fetchCourses() {
-  //   const db = getDatabase();
-  //   onValue(ref(db, '/courses'), (snapshot) => {
-  //     if (snapshot.exists()) {
-  //       const coursesData = snapshot.val();
-  //       console.log(coursesData);
-  //       this.courses = Object.keys(coursesData);
-  //       console.log(this.courses);
-  //     } else {
-  //       console.log("eerror");
-  //     }
-  //   }, {
-  //     onlyOnce: true
-  //   });
-  // }
-
-  // fetchCourses() {
-  //   const db = getDatabase();
-  //   onValue(ref(db, '/courses'), (snapshot) => {
-  //     const coursesData = snapshot.val() || {};
-  //     this.availableCourses = {};
-  //     Object.keys(coursesData).forEach((key) => {
-  //       this.availableCourses[key] = coursesData[key];
-  //     });
-  //     this.availableCourses = Object.keys(this.availableCourses);
-  //   }, {
-  //     onlyOnce: true
-  //   });
-  // }
-
-
 
   saveCourseSelections() {
     const auth = getAuth();
     const user = auth.currentUser;
     if (user) {
       const db = getDatabase();
-      // Filter selected courses
-      const selectedCourses = Object.keys(this.courseSelections).filter(key => this.courseSelections[key]);
-      const updates: { [key: string]: any } = {};
-      console.log(selectedCourses);
-      // updates['/learners/' + user.uid + '/courses'] = selectedCourses;
-      // update(ref(db), updates).then(() => {
-      //   this.courses = selectedCourses;
-      // }).catch(error => {
-      //   console.error("Error updating courses: ", error);
-      // });
+      const selectedCourses = Object.keys(this.courseSelections).filter(key => this.courseSelections[key] && !this.courses.includes(key));
+      let addCourses: { [key: string]: { skills: { newUser: number } } } = {};
+      for (let course of selectedCourses) {
+        addCourses[course] = { skills: { newUser: 0 } };
+      }
+      let updates: { [key: string]: any } = {};
+      for (const [key, value] of Object.entries(addCourses)){
+        updates['/learners/' + this.userId + '/courses/' + key] = value;
+        update(ref(db), updates).then(() => {
+          this.getUserInfo(user);
+          this.fetchCourses();
+        }).catch(error => {
+          console.error("Error updating courses: ", error);
+        });
+      }
     }
   }
-
-
-
 }
-
-
