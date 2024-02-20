@@ -28,16 +28,17 @@ import { FirebaseApp } from '@angular/fire/compat';
 import { AccessAccountComponent } from './access-account/access-account.component';
 import { MathematicsComponent } from './mathematics/mathematics.component';
 import { ScienceComponent } from './science/science.component';
-import { EnglishComponent } from './English/english/english.component';
-import { SocialscienceComponent } from './social_science/socialscience.component';
-import { ComprehensionComponent } from './English/comprehension/comprehension.component';
+import { EnglishComponent } from './english/english.component';
+import { SocialScienceComponent } from './social_science/social_science.component';
 import { CheckemailComponent } from './checkemail/checkemail.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { BadgeComponent } from './badge/badge.component';
 import { InstructorComponent } from './guide/instructor/instructor.component';
 import { InstructorLoginComponent } from './guide/instructor-login/instructor-login.component';
 import { InstructorSignupComponent } from './guide/instructor-signup/instructor-signup.component';
-import { ParentComponent } from './parent/parent.component';
+import { ParentComponent } from './guardian/parent/parent.component';
+import { ParentLoginComponent } from './guardian/parent-login/parent-login.component';
+import { ParentSignupComponent } from './guardian/parent-signup/parent-signup.component';
 
 @NgModule({
   declarations: [
@@ -58,8 +59,7 @@ import { ParentComponent } from './parent/parent.component';
     MathematicsComponent,
     ScienceComponent,
     EnglishComponent,
-    SocialscienceComponent,
-    ComprehensionComponent,
+    SocialScienceComponent,
     CheckemailComponent,
     AboutusComponent,
     BadgeComponent,
@@ -67,6 +67,8 @@ import { ParentComponent } from './parent/parent.component';
     InstructorLoginComponent,
     InstructorSignupComponent,
     ParentComponent,
+    ParentLoginComponent,
+    ParentSignupComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SocialscienceComponent } from './socialscience.component';
+import { ParentSignupComponent } from './parent-signup.component';
 
-describe('SocialscienceComponent', () => {
-  let component: SocialscienceComponent;
-  let fixture: ComponentFixture<SocialscienceComponent>;
+describe('ParentSignupComponent', () => {
+  let component: ParentSignupComponent;
+  let fixture: ComponentFixture<ParentSignupComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SocialscienceComponent]
+      declarations: [ParentSignupComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(SocialscienceComponent);
+    fixture = TestBed.createComponent(ParentSignupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

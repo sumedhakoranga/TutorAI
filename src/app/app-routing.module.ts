@@ -9,16 +9,17 @@ import { TeachersComponent } from './learner/teachers/teachers.component';
 import { AccessAccountComponent } from './access-account/access-account.component';
 import { MathematicsComponent } from './mathematics/mathematics.component';
 import { ScienceComponent } from './science/science.component';
-import { EnglishComponent } from './English/english/english.component';
-import { SocialscienceComponent } from './social_science/socialscience.component';
-import { ComprehensionComponent } from './English/comprehension/comprehension.component';
+import { EnglishComponent } from './english/english.component';
+import { SocialScienceComponent } from './social_science/social_science.component';
 import { IntroComponent } from './intro-page/intro/intro.component';
 import { CheckemailComponent } from './checkemail/checkemail.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { InstructorComponent } from './guide/instructor/instructor.component';
 import { InstructorLoginComponent } from './guide/instructor-login/instructor-login.component';
 import { InstructorSignupComponent } from './guide/instructor-signup/instructor-signup.component';
-import { ParentComponent } from './parent/parent.component';
+import { ParentComponent } from './guardian/parent/parent.component';
+import { ParentLoginComponent } from './guardian/parent-login/parent-login.component';
+import { ParentSignupComponent } from './guardian/parent-signup/parent-signup.component';
 
 const routes: Routes = [
   { path: 'checkemail', component: CheckemailComponent },
@@ -27,6 +28,8 @@ const routes: Routes = [
   { path: 'aboutus', component: AboutusComponent },
   { path: 'instructor', component: InstructorComponent },
   { path: 'parent', component: ParentComponent },
+  { path: 'guardian/parent-login', component: ParentLoginComponent },
+  { path: 'guardian/parent-signup', component: ParentSignupComponent },
   { path: 'intro-page/intro', component: IntroComponent },
   { path: 'access-account', component: AccessAccountComponent },
   { path: 'learner/login', component: LoginComponent },
@@ -34,8 +37,7 @@ const routes: Routes = [
   { path: 'mathematics', component: MathematicsComponent },
   { path: 'science', component: ScienceComponent },
   { path: 'english', component: EnglishComponent },
-  { path: 'comprehension', component: ComprehensionComponent },
-  { path: 'social_science', component: SocialscienceComponent },
+  { path: 'social_science', component: SocialScienceComponent },
   { path: 'courses', component: CoursesComponent },
   { path: 'progress', component: ProgressComponent },
   { path: 'profile', component: ProfileComponent },

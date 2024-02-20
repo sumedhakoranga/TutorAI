@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ComprehensionComponent } from './comprehension.component';
+import { ParentLoginComponent } from './parent-login.component';
 
-describe('ComprehensionComponent', () => {
-  let component: ComprehensionComponent;
-  let fixture: ComponentFixture<ComprehensionComponent>;
+describe('ParentLoginComponent', () => {
+  let component: ParentLoginComponent;
+  let fixture: ComponentFixture<ParentLoginComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ComprehensionComponent]
+      declarations: [ParentLoginComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ComprehensionComponent);
+    fixture = TestBed.createComponent(ParentLoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

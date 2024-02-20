@@ -105,3 +105,24 @@
   color: #4caf50;
   margin-bottom: 1rem;
 }
+
+.register-invitation {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.register-invitation h1 {
+  color: #495057;
+  margin-bottom: 15px;
+}
+
+.register-btn:hover,
+.register-btn:focus {
+  background-color: #157347;
+  transform: translateY(-2px);
+  border-color: #145c32;
+}

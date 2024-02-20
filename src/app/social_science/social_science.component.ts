@@ -5,23 +5,23 @@ import { Router } from '@angular/router';
 import axios from 'axios';
 
 @Component({
-  selector: 'app-science',
-  templateUrl: './science.component.html',
-  styleUrl: './science.component.css'
+  selector: 'app-social_science',
+  templateUrl: './social_science.component.html',
+  styleUrl: './social_science.component.css'
 })
-export class ScienceComponent implements OnInit {
+export class SocialScienceComponent implements OnInit {
   hasQuizStarted = false;
-  scienceQuestions: any = {};
+  social_scienceQuestions: any = {};
   username: string;
   currentQuestionCount: number = 0;
   totalQuestionCount: number = 5;
   score = 0;
   showScore = false;
-  scoreTemplate:any;
+  scoreTemplate: any;
   userId: string = '';
   currentAnswerCorrect: boolean | null = null;
   answerFeedback: string = '';
-  selectedAnswer: number; 
+  selectedAnswer: number;
   question: any;
   questionFetched = false;
   registeredCourse = false;
@@ -31,7 +31,7 @@ export class ScienceComponent implements OnInit {
   constructor(private router: Router) { }
 
   startQuiz() {
-    if(this.registeredCourse===false){
+    if (this.registeredCourse === false) {
       alert("you are not registered in this course");
     }
     this.hasQuizStarted = true;
@@ -58,7 +58,7 @@ export class ScienceComponent implements OnInit {
         const userCoursesRef = ref(db, '/learners/' + this.userId);
         onValue(userCoursesRef, (snapshot) => {
           this.username = snapshot.val().username || 'Anonymous';
-          this.registeredCourse = Object.keys(snapshot.val().courses).includes('science');
+          this.registeredCourse = Object.keys(snapshot.val().courses).includes('social_science');
           console.log(this.registeredCourse);
         }, {
           onlyOnce: true
@@ -75,14 +75,14 @@ export class ScienceComponent implements OnInit {
     const data = {
       task: 'get_question',
       learner_id: this.userId,
-      course: 'science'
+      course: 'social_science'
     };
 
     axios.post('https://us-central1-tutorai00411.cloudfunctions.net/kt_ai', data)
       .then((response: any) => {
         let question_id = response.data.question_id;
         const db = getDatabase();
-        onValue(ref(db, '/questions/science/' + question_id), (snapshot) => {
+        onValue(ref(db, '/questions/social_science/' + question_id), (snapshot) => {
           this.question = snapshot.val();
           this.questionFetched = true;
           this.answerFeedback = '';
@@ -123,7 +123,7 @@ export class ScienceComponent implements OnInit {
     let data = {
       task: 'update_skill',
       learner_id: this.userId,
-      course: 'science',
+      course: 'social_science',
       skill: this.question.skill,
       result: 0
     };

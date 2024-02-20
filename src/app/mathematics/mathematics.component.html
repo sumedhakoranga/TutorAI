@@ -34,7 +34,7 @@
             placeholder="Type your answer here" required></textarea>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary submit-btn" [disabled]="!selectedAnswer">Next</button>
+      <button type="submit" class="btn btn-primary submit-btn" [disabled]="!selectedAnswer || disableSubmit">Submit</button>
       <div *ngIf="currentAnswerCorrect !== null">
         <p>{{ answerFeedback }}</p>
         <!-- <button *ngIf="!currentAnswerCorrect" class="btn btn-warning" (click)="tryAgain()">Try Again</button> -->

@@ -28,6 +28,7 @@
     "firebase": "^10.8.0",
     "google-auth-library": "^9.6.3",
     "jquery": "^3.7.1",
+    "mdb-angular-ui-kit": "^6.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

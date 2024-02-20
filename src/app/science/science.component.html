@@ -1,5 +1,9 @@
 <!-- Introduction Section -->
-<div class="container bg-light py-5" *ngIf="!hasQuizStarted">
+<div *ngIf="!registeredCourse" class="register-invitation">
+  <h1 class="display-5 fw-bold">Please register to take part in the quiz.</h1>
+  <button class = "btn btn-success register-btn" routerLink="/courses">Register here</button>
+</div>
+<div class="container bg-light py-5" *ngIf="registeredCourse && !hasQuizStarted">
   <h1 class="display-5 fw-bold">Welcome to Science</h1>
   <p class="col-md-8 fs-4">This quiz will contain a total of 5 questions. Each Question holds 1 Point.</p>
   <h4>Rules:</h4>
@@ -20,35 +24,35 @@
     </div>
     <h2 class="quiz-header">Science Quiz</h2>
     <form>
-      <div *ngIf="scienceQuestions.length > 0; else loading">
+      <div *ngIf="questionFetched; else loading">
         <h2>Question:</h2>
-        <p>{{ scienceQuestions[currentQuestionIndex].question }}</p>
+        <p>{{ question.question }}</p>
         <h2>Answer:</h2>
-        <div class="multichoice" *ngFor="let choice of scienceQuestions[currentQuestionIndex].choices; let i = index">
+        <div class="multichoice" *ngFor="let choice of question.choices; let i = index">
           <input type="radio" [id]="'choice' + i" name="answer" [(ngModel)]="selectedAnswer" [value]="i">
           <label [for]="'choice' + i">{{ choice }}</label>
         </div>
         <div *ngIf="answerFeedback" class="feedback">
           <p>{{ answerFeedback }}</p>
-          <button *ngIf="currentAnswerCorrect === false" type="button" class="btn btn-warning" (click)="tryAgain()">Try
-            Again</button>
-          <button *ngIf="currentQuestionIndex < scienceQuestions.length" type="button" class="btn btn-secondary"
-            (click)="moveToNextQuestion()">Next Question</button>
+          <!-- <button *ngIf="currentAnswerCorrect === false" type="button" class="btn btn-warning" (click)="tryAgain()">Try
+            Again</button> -->
+          <button *ngIf="currentQuestionCount < totalQuestionCount" type="button" class="btn btn-secondary"
+            (click)="nextQuestion()">Next Question</button>
         </div>
       </div>
 
       <ng-template #loading>
         <p>Loading questions...</p>
       </ng-template>
-      <button type="button" class="btn btn-primary submit-btn" (click)="checkAnswer()"
-        [disabled]="selectedAnswer === undefined || selectedAnswer === null || selectedAnswer === ''">
+      <button type="button" class="btn btn-primary submit-btn" (click)="submitAnswer()"
+        [disabled]="selectedAnswer === undefined || selectedAnswer === null || disableSubmit">
         Submit Answer
       </button>
     </form>
   </div>
   <ng-template #scoreTemplate>
     <div class="scoreTemp">
-      <h2>Your Score: {{ score }}/{{ scienceQuestions.length }}</h2>
+      <h2>Your Score: {{ score }}/{{ totalQuestionCount }}</h2>
       <button class="btn btn-primary" routerLink='/courses'>Go to Course Page</button>
     </div>
   </ng-template>

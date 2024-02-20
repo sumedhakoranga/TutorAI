@@ -25,6 +25,8 @@ export class MathematicsComponent implements OnInit {
   userId : string = '';
   question : any;
   questionFetched = false;
+  disableSubmit: boolean = false;
+
 
   constructor(private router: Router) { }
 
@@ -41,9 +43,6 @@ export class MathematicsComponent implements OnInit {
     const progress = ((this.currentQuestionCount + 1) / this.totalQuestionCount) * 100;
     return `${progress}%`;
   }
-
-
-
 
   ngOnInit(): void {
     this.getUserInfo();
@@ -63,7 +62,7 @@ export class MathematicsComponent implements OnInit {
         });
 
       } else {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       }
     });
 
@@ -85,6 +84,7 @@ export class MathematicsComponent implements OnInit {
         onValue(ref(db, '/questions/mathematics/'+question_id), (snapshot) => {
           this.question = snapshot.val();
           this.questionFetched = true;
+          this.answerFeedback = '';
           console.log(this.question);
         }, {
           onlyOnce: true
@@ -113,34 +113,36 @@ export class MathematicsComponent implements OnInit {
     if (this.currentQuestionCount < this.totalQuestionCount - 1) {
       this.currentQuestionCount++;
       this.selectedAnswer = '';
+      this.disableSubmit = false;
       this.loadQuestion();
     } else {
       this.showScore = true;
     }
   }
 
-  checkAnswer() {
-    let result = this.selectedAnswer.trim().toLowerCase() === this.question.answer.trim().toLowerCase();
-    if (result) {
-      this.score++;
-    }
-    const data = {
-      task: 'update_skill',
-      learner_id: this.userId,
-      course: 'mathematics',
-      skill: this.question.skill,
-      result: result
-    };
-    axios.post('https://us-central1-tutorai00411.cloudfunctions.net/kt_ai', data)
-      .then((response: any) => {
-        console.log(response.data);
-      })
-      .catch((error: any) => {
-        console.error(error);
-      });
-  }
+  // checkAnswer() {
+  //   let result = this.selectedAnswer.trim().toLowerCase() === this.question.answer.trim().toLowerCase();
+  //   if (result) {
+  //     this.score++;
+  //   }
+  //   const data = {
+  //     task: 'update_skill',
+  //     learner_id: this.userId,
+  //     course: 'mathematics',
+  //     skill: this.question.skill,
+  //     result: result
+  //   };
+  //   axios.post('https://us-central1-tutorai00411.cloudfunctions.net/kt_ai', data)
+  //     .then((response: any) => {
+  //       console.log(response.data);
+  //     })
+  //     .catch((error: any) => {
+  //       console.error(error);
+  //     });
+  // }
 
   submitAnswer() {
+    this.disableSubmit = true;
     this.currentAnswerCorrect = this.selectedAnswer.trim().toLowerCase() === this.question.answer.trim().toLowerCase();
     // this.checkAnswer();
     let data = {
