@@ -3,13 +3,14 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getDatabase, ref, set } from "firebase/database";
-
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 @Component({
   selector: 'app-instructor-signup',
   templateUrl: './instructor-signup.component.html',
   styleUrl: './instructor-signup.component.css'
 })
+
 export class InstructorSignupComponent implements OnInit {
   type: string = "password";
   isText: boolean = false;
@@ -22,6 +23,12 @@ export class InstructorSignupComponent implements OnInit {
 
 
   ngOnInit(): void {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.router.navigate(['/instructor']);
+      }
+    });
     this.signUpForm = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -40,22 +47,25 @@ export class InstructorSignupComponent implements OnInit {
   onSignUp() {
     if (this.signUpForm.valid) {
       this.isLoading = true;
-      const { email, password, username } = this.signUpForm.value;
+      const { firstname, lastname, email, password, username } = this.signUpForm.value;
       this.auth.createUserWithEmailAndPassword(email, password)
         .then(userCredential => {
-          // Handle successful signup
+          // Handle successful instructor-signup
           const user = userCredential.user;
           if (user) {
             user.sendEmailVerification()
               .then(() => {
                 const uid = user.uid;
                 const db = getDatabase();
+                console.log(uid);
                 set(ref(db, 'users/' + uid), {
-                  type: 'learners'
+                  type: 'instructors'
                 });
-                set(ref(db, 'learners/' + uid), {
+                set(ref(db, 'instructors/' + uid), {
                   username: username,
-                  email: email
+                  email: email,
+                  firstname: firstname,
+                  lastname: lastname
                 });
                 this.router.navigate(['/checkemail']);
               })
@@ -90,3 +100,4 @@ export class InstructorSignupComponent implements OnInit {
   }
 
 }
+

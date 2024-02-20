@@ -10,12 +10,11 @@ import { Router } from '@angular/router';
 })
 
 export class CoursesComponent implements OnInit {
+  constructor(private router: Router) { }
+
   courseSelections: { [key: string]: boolean } = {};
   isLoggedIn = false;
   isLoading = true;
-
-  constructor(private router: Router) { }
-
   courses: any[] = [];
   userId: string = '';
   username: string = 'Loading...';

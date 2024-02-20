@@ -1,56 +1,78 @@
-<!-- Welcome Message -->
-<div class="container mt-3">
-  <div class="row">
-    <div class="col">
-      <h1>Welcome, krita kruti</h1>
-    </div>
-    <div class="col text-end">
-      <button class="btn btn-outline-primary">Parent resources</button>
-    </div>
+<!-- Loader -->
+<div *ngIf="isLoading" class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
   </div>
 </div>
 
-<div class="container mt-4">
-  <h5>Welcome to Tutor.AI</h5>
-  <p>Learn what you can do with Tutor.AI as a parent.</p>
-
-
-  <h3 class="mt-4">Your children</h3>
-  <p>These are your children's accounts. Click your child's name to view their progress.</p>
-
-  <div class="card mt-3">
-    <div class="card-body">
-      <h5 class="card-title">Ready to add your child?</h5>
-      <p>Click “Add a child” to create a new account for your child.</p>
-      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addChildModal">Add a child</button>
+<div *ngIf="!isLoading" class="">
+  <!-- Welcome Message -->
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col">
+        <h1>Welcome, {{firstname}}</h1>
+      </div>
+      <div class="col text-end">
+        <button class="btn btn-outline-primary">Parent resources</button>
+      </div>
     </div>
   </div>
+
+  <div class="container mt-4">
+    <h5>Welcome to Tutor.AI</h5>
+    <p>Learn what you can do with Tutor.AI as a parent.</p>
+
+
+    <h3 class="mt-4">Your children</h3>
+    <p>These are your children's accounts. Click your child's name to view their progress.</p>
+
+    <div class="card mt-3">
+      <div class="card-body">
+        <h5 class="card-title">Ready to add your child?</h5>
+        <p>Click “Add a child” to create a new account for your child.</p>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addChildModal">Add a child</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addChildModal" tabindex="-1" aria-labelledby="addChildModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="addChildModalLabel">Add a child</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <p>Let's create an account for your child.</p>
+          <div class="mb-3">
+            <label for="childUsername">Child's username</label>
+            <input type="text" class="form-control" id="childUsername" placeholder="example: Test@1234">
+          </div>
+          <div class="mb-3">
+            <label for="childPassword">Child password</label>
+            <input type="password" class="form-control" id="childPassword">
+          </div>
+          <div class="form-check mb-3">
+            <input type="checkbox" id="termsCheck">
+            <label class="form-check-label" for="termsCheck">I confirm I confirm that I am this child's parent or legal
+              guardian.</label>
+          </div>
+          <button class="btn btn-success" (click)="onSubmit()" type="submit">Submit</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div *ngFor="let childName of children">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ childName }}</h5>
+      </div>
+    </div>
+  </div>
+
 </div>
-
-<div class="modal fade" id="addChildModal" tabindex="-1" aria-labelledby="addChildModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h5 class="modal-title" id="addChildModalLabel">Add a child</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-
-      <div class="modal-body">
-        <p>Let's create an account for your child.</p>
-        <div class="mb-3">
-          <label for="childUsername">Child's username</label>
-          <input type="text" class="form-control" id="childUsername" placeholder="example: Test@1234">
-        </div>
-        <div class="mb-3">
-          <label for="childPassword">Child password</label>
-          <input type="password" class="form-control" id="childPassword">
-        </div>
-        <div class="form-check mb-3">
-          <input type="checkbox" id="termsCheck">
-          <label class="form-check-label" for="termsCheck">I confirm I confirm that I am this child's parent or legal
-            guardian.</label>
-        </div>
-        <button class="btn btn-success" type="submit">Submit</button>
-      </div>

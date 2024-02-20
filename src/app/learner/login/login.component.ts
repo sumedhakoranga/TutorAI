@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   isText: boolean = false;
   eyeIcon: string = "fa-eye-slash";
   loginForm!: FormGroup;
-  
+
   constructor(private fb: FormBuilder, private afAuth: AngularFireAuth, private router: Router) { }
 
   ngOnInit(): void {
@@ -58,40 +58,40 @@ export class LoginComponent implements OnInit {
   isLoggingIn: boolean = false;
   loginWithFacebook() {
     if (this.isLoggingIn) return;
-    this.isLoggingIn = true; // Disable the login button
+    this.isLoggingIn = true;
     this.afAuth.signInWithPopup(new FacebookAuthProvider()).then((result) => {
-      this.router.navigate(['/main']);
+      this.router.navigate(['/courses']);
     }).catch((error) => {
       // Handle error
       console.log(error);
     }).finally(() => {
-      this.isLoggingIn = false; // Re-enable the login button after popup is handled
+      this.isLoggingIn = false;
     });
   }
 
   loginWithGoogle() {
     if (this.isLoggingIn) return;
-    this.isLoggingIn = true; // Disable the login button
+    this.isLoggingIn = true;
     this.afAuth.signInWithPopup(new GoogleAuthProvider()).then((result) => {
-      this.router.navigate(['/main']);
+      this.router.navigate(['/courses']);
     }).catch((error) => {
       // Handle error
       console.log(error);
     }).finally(() => {
-      this.isLoggingIn = false; // Re-enable the login button after popup is handled
+      this.isLoggingIn = false;
     });
   }
 
   loginWithGithub() {
     if (this.isLoggingIn) return;
-    this.isLoggingIn = true; // Disable the login button
+    this.isLoggingIn = true;
     this.afAuth.signInWithPopup(new GithubAuthProvider()).then((result) => {
-      this.router.navigate(['/main']);
+      this.router.navigate(['/courses']);
     }).catch((error) => {
       // Handle error
       console.log(error);
     }).finally(() => {
-      this.isLoggingIn = false; // Re-enable the login button after popup is handled
+      this.isLoggingIn = false;
     });
   }
 
@@ -99,15 +99,12 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
-      // Assuming username is actually the user's email
       this.afAuth.signInWithEmailAndPassword(username, password)
         .then(result => {
-          // Handle successful login, e.g., redirect or update UI
           console.log('Login successful', result);
           this.router.navigate(['/courses']);
         })
         .catch(error => {
-          // Handle login error
           console.error('Login error', error);
           alert(error.message);
         });
@@ -134,7 +131,7 @@ export class LoginComponent implements OnInit {
 
   promptResetPassword() {
     const email = prompt('Please enter your email address to reset your password:');
-    if (email) { // Check if email is not null
+    if (email) {
       this.resetPassword(email);
     } else {
       alert('Email address is required.');

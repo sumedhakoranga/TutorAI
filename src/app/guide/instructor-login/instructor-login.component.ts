@@ -5,7 +5,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FacebookAuthProvider } from 'firebase/auth';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { GithubAuthProvider } from "firebase/auth";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
 @Component({
@@ -22,6 +22,12 @@ export class InstructorLoginComponent implements OnInit {
 
 
   ngOnInit(): void {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.router.navigate(['/instructor']);
+      }
+    });
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
