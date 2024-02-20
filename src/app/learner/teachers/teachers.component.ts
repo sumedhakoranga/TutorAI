@@ -9,5 +9,5 @@ import { Router } from '@angular/router';
 })
 export class TeachersComponent {
   constructor(private router: Router) { }
-
+  username: string='';
 }

@@ -5,30 +5,21 @@
 </div>
 
 <div *ngIf="isLoggedIn" class="courses_component">
-  <header class="p-3 mb-3 border-bottom bg-color light">
+  <header class="profile-header">
     <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <button class="border-0 bg-primary px-2 mx-2 rounded">Your EXP
-          <span class="fa fa-bolt"></span>
-        </button>
-
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a routerLink="/courses" class="nav-link px-2 link-dark">Courses</a></li>
-          <li><a routerLink="/courses" class="nav-link px-2 link-dark">Practice</a></li>
-          <li><a routerLink="/courses" class="nav-link px-2 link-dark">Resources</a></li>
-        </ul>
-
-        <p class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 text-center">{{username}}</p>
-
-        <div class="user_profile">
-          <a routerLink="/courses" class="text-decoration-none" id="user">
-            <img src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
-              alt="image" width="32" height="32" class="rounded-circle">
-          </a>
+      <div class="profile-section">
+        <img src="/assets/img/avatar.png" alt="Profile Image" class="profile-pic">
+        <div class="user-info">
+          <h1 class="username">{{username}}</h1>
+          <p class="user-bio">You are champion!!!!</p>
         </div>
+      </div>
+      <div class="user-actions">
+        <button class="profile-btn fa fa-bolt" routerLink="/profile">Exp</button>
       </div>
     </div>
   </header>
+
 
   <!-- Loader -->
   <div *ngIf="isLoading" class="d-flex justify-content-center align-items-center" style="height: 100vh;">
@@ -40,7 +31,7 @@
   <div *ngIf="!isLoading" class="courses_component">
 
 
-    <div class="container">
+    <div class="container my-5">
       <div class="row">
         <div class="col-sm-12 col-md-2 nav_content mt-0">
           <main class="container">
@@ -107,12 +98,13 @@
               <h5 class="py-3 ouruser">Welcome, {{ firstname }}</h5>
               <div class="col-md-4 mb-4" *ngFor="let course of courses; index as i">
                 <!-- Modal -->
-                <div class="modal fade" id="unenrollModal{{i}}" tabindex="-1" attr.aria-labelledby="unenrollModalLabel{{i}}"
-                  aria-hidden="true">
+                <div class="modal fade" id="unenrollModal{{i}}" tabindex="-1"
+                  attr.aria-labelledby="unenrollModalLabel{{i}}" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="unenrollModalLabel{{i}}">Unenroll Course - {{ courseName[i] }}</h1>
+                        <h1 class="modal-title fs-5" id="unenrollModalLabel{{i}}">Unenroll Course - {{ courseName[i] }}
+                        </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">

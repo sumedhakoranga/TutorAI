@@ -9,4 +9,5 @@ import { Router } from '@angular/router';
 })
 export class ProgressComponent {
   constructor(private router: Router) { }
+  username: string = 'Loading...';
 }
