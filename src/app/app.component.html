@@ -13,14 +13,14 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item" *ngIf="!isLoggedIn">
-          <a class="nav-link active" aria-current="page" role="button" routerLink="/access-account">Sign Up</a>
+          <a class="nav-link active" aria-current="page" role="button" routerLink="/access-account">Sign Up / Login</a>
         </li>
         <!-- Toggle between Login and Logout based on isLoggedIn status -->
-        <li *ngIf="isLoggedIn"><a href="#" routerLink="/courses" class="nav-link px-2 link-dark">courses</a></li>
-        <li *ngIf="!isLoggedIn"><a href="#" routerLink="/learner/login" class="nav-link px-2 link-dark">Login</a></li>
+        <li *ngIf="isLoggedIn"><a href="#" routerLink="/courses" class="nav-link px-2 link-dark">Courses</a></li>
+        <!-- <li *ngIf="!isLoggedIn"><a href="#" routerLink="/learner/login" class="nav-link px-2 link-dark">Login</a></li> -->
         <li *ngIf="isLoggedIn"><a href="#" (click)="logout()" class="nav-link px-2 link-dark">Logout</a></li>
         <li class="nav-item dropdown">
-          <a class="nav-link active" aria-current="page" role="button" routerLink="/aboutus">about us</a>
+          <a class="nav-link active" aria-current="page" role="button" routerLink="/aboutus">About us</a>
         </li>
       </ul>
     </div>

@@ -1,0 +1,18 @@
+<div class="doubt-box">
+    <h5 class="ask-title">Having doubts Ask your Tutor now!!</h5>
+    <!-- Chat box container -->
+    <div class="chat-container" #chatContainer>
+      <div *ngFor="let message of messages"
+        [ngClass]="{'message-user': message.type === 'right', 'message-ai': message.type !== 'right'}">
+        {{ message.text }}
+      </div>
+    </div>
+    <p>Powered by <a href="https://blog.google/technology/ai/google-gemini-ai/">Google Gemini Pro</a></p>
+    <form action="#" class="send-container" style="margin-bottom: 0px !important;">
+      <div class="input-group">
+        <input type="text" class="form-control chat-bubble" placeholder="Type your message here..." id="messageInp" rows="1"
+          style="height: auto;" #messageInp name="messageInp">
+        <button class="btn" type="button" (click)="onSend()">Send</button>
+      </div>
+    </form>
+</div>

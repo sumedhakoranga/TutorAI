@@ -20,6 +20,7 @@ import { InstructorSignupComponent } from './guide/instructor-signup/instructor-
 import { ParentComponent } from './guardian/parent/parent.component';
 import { ParentLoginComponent } from './guardian/parent-login/parent-login.component';
 import { ParentSignupComponent } from './guardian/parent-signup/parent-signup.component';
+import { AskaiComponent } from './learner/askai/askai.component';
 
 const routes: Routes = [
   { path: 'checkemail', component: CheckemailComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'access-account', component: AccessAccountComponent },
   { path: 'learner/login', component: LoginComponent },
   { path: 'learner/signup', component: SignupComponent },
+  { path: 'learner/askai', component: AskaiComponent },
   { path: 'mathematics', component: MathematicsComponent },
   { path: 'science', component: ScienceComponent },
   { path: 'english', component: EnglishComponent },

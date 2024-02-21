@@ -39,6 +39,7 @@ import { InstructorSignupComponent } from './guide/instructor-signup/instructor-
 import { ParentComponent } from './guardian/parent/parent.component';
 import { ParentLoginComponent } from './guardian/parent-login/parent-login.component';
 import { ParentSignupComponent } from './guardian/parent-signup/parent-signup.component';
+import { AskaiComponent } from './learner/askai/askai.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { ParentSignupComponent } from './guardian/parent-signup/parent-signup.co
     ParentComponent,
     ParentLoginComponent,
     ParentSignupComponent,
+    AskaiComponent,
   ],
   imports: [
     BrowserModule,
