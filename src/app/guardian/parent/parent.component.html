@@ -43,7 +43,7 @@
           <!-- Modal Header -->
           <div class="modal-header">
             <h5 class="modal-title" id="addChildModalLabel">Connect with your kids</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
           </div>
 
           <div class="modal-body">
@@ -58,7 +58,7 @@
                 legal
                 guardian.</label>
             </div>
-            <button class="btn btn-success" (click)="onSubmit()" type="submit">Submit</button>
+            <button class="btn btn-success" data-bs-dismiss="modal" (click)="onSubmit()" type="submit">Submit</button>
           </div>
 
         </div>
@@ -66,10 +66,10 @@
     </div>
   </form>
 
-  <div *ngFor="let childName of children">
+  <div *ngFor="let currentChildInfo of childInfo">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">{{ childName }}</h5>
+        <h5 class="card-title">{{ currentChildInfo.firstname }} {{ currentChildInfo.lastname }}</h5>
       </div>
     </div>
   </div>

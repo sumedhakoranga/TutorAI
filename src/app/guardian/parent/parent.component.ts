@@ -20,6 +20,9 @@ export class ParentComponent {
   childName: string[] = [];
   children = [];
   childDataForm!: FormGroup;
+  childId: any;
+  childInfo: any = [];
+  xyz: any;
 
   ngOnInit() {
     this.loadData();
@@ -42,12 +45,26 @@ export class ParentComponent {
     if (user) {
       this.userId = user.uid;
       const db = getDatabase();
-      const userRef = ref(db, '/parents/' + this.userId);
+      const userRef = ref(db, '/parents/' + this.userId );
       onValue(userRef, (snapshot) => {
         if (snapshot.exists()) {
           const userData = snapshot.val();
           this.username = userData.username || 'Anonymous';
           this.firstname = userData.firstname || 'Anonymous';
+          this.childId = userData.child;
+          this.childInfo = [];
+          for (let [id, status] of Object.entries(this.childId)){
+            const learnersRef = ref(db, '/learners/' + id);
+            onValue(learnersRef, (snapshot) => {
+              if (snapshot.exists()) {
+                this.childInfo.push(snapshot.val());
+              } else {
+                console.log("User is logged in but not registered.");
+              }
+            }, {
+              onlyOnce: true
+            });
+          }
         } else {
           console.log("User is logged in but not registered.");
         }
@@ -59,6 +76,28 @@ export class ParentComponent {
       this.router.navigate(['/guardian/parent-login']);
     }
   }
+
+  // getChildInfo(user: any) {
+  //   if (user) {
+  //     this.userId = user.uid;
+  //     const db = getDatabase();
+  //     const childRef = ref(db, '/parents/' + this.userId + '/child/');
+  //     console.log(childRef);
+  //     onValue(childRef, (snapshot) => {
+  //       if (snapshot.exists()) {
+  //         const childData = snapshot.val();
+  //         this.childName = childData.childName || 'Anonymous';
+  //       } else {
+  //         console.log("User is logged in but not registered.");
+  //       }
+  //     }, {
+  //       onlyOnce: true
+  //     });
+  //   } else {
+  //     // User is not logged in
+  //     this.router.navigate(['/guardian/parent-login']);
+  //   }
+  // }
 
   onSubmit() {
     if (this.childDataForm) {
