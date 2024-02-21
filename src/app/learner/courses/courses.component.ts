@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { getDatabase, ref, onValue, update, remove } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Router } from '@angular/router';
+
+interface ChatMessage {
+text: string;
+type: 'right' | 'left';
+}
 
 @Component({
   selector: 'app-courses',
@@ -11,6 +16,9 @@ import { Router } from '@angular/router';
 
 export class CoursesComponent implements OnInit {
   constructor(private router: Router) { }
+  @ViewChild('messageInp') messageInput: ElementRef;
+  messages: ChatMessage[] = [];
+
 
   courseSelections: { [key: string]: boolean } = {};
   isLoggedIn = false;
@@ -24,6 +32,10 @@ export class CoursesComponent implements OnInit {
   allCourseName: any[] = [];
   unenrolledCourses: any[] = [];
   unenrolledCourseName: any[] = [];
+
+
+ 
+
 
   ngOnInit() {
     this.loadData();
@@ -137,4 +149,19 @@ export class CoursesComponent implements OnInit {
       });
     }
   }
+
+  onSend() {
+    const messageText = this.messageInput.nativeElement.value;
+    if (messageText.trim().length === 0) return; // Prevent sending empty messages
+    console.log(messageText);
+    const newMessage: ChatMessage = {
+      text: messageText,
+      type: 'right'
+    };
+
+    this.messages.push(newMessage);
+    console.log(this.messages);
+    this.messageInput.nativeElement.value = ''; // Clear input field
+    }
+
 }

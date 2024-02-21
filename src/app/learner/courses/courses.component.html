@@ -17,6 +17,46 @@
       <div class="user-actions">
         <button class="profile-btn fa fa-bolt" routerLink="/profile">Exp</button>
       </div>
+      <div class="user-actions">
+        <!-- <button class="profile-btn fa fa-bolt" routerLink="">Ask AI </button> -->
+        <button class="profile-btn fa fa-bolt" data-bs-toggle="modal" data-bs-target="#fullscreenModal">Ask AI</button>
+      </div>
+
+      <!-- Fullscreen Modal -->
+      <div class="modal fade" id="fullscreenModal" tabindex="-1" aria-labelledby="fullscreenModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="fullscreenModalLabel">Chat with AI</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- Chat box container -->
+              <div class="chat-container" style="overflow-y: auto; max-height: 70vh;">
+                <div *ngFor="let message of messages"
+                  [ngClass]="{'message-user': message.type === 'right', 'message-ai': message.type !== 'right'}"
+                  class="mb-2">{{ message.text }}
+                </div>
+              </div>
+              <form action="#" class="send-container  mt-3 g-2" style="margin-bottom: 0px !important;">
+                <div class="input-group mb-3 ml-5" style="width: 85%;">
+                  <input type="text" class="form-control" placeholder="Type your message here..." id="messageInp"
+                    rows="1" style="height: auto;" #messageInp name="messageInp">
+                  <button class="btn btn-primary" type="button" (click)="onSend()" style="width: auto;">Send</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
     </div>
   </header>
 

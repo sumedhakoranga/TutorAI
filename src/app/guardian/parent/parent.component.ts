@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { getDatabase, ref, onValue, update, child } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-parent',
@@ -76,28 +76,6 @@ export class ParentComponent {
       this.router.navigate(['/guardian/parent-login']);
     }
   }
-
-  // getChildInfo(user: any) {
-  //   if (user) {
-  //     this.userId = user.uid;
-  //     const db = getDatabase();
-  //     const childRef = ref(db, '/parents/' + this.userId + '/child/');
-  //     console.log(childRef);
-  //     onValue(childRef, (snapshot) => {
-  //       if (snapshot.exists()) {
-  //         const childData = snapshot.val();
-  //         this.childName = childData.childName || 'Anonymous';
-  //       } else {
-  //         console.log("User is logged in but not registered.");
-  //       }
-  //     }, {
-  //       onlyOnce: true
-  //     });
-  //   } else {
-  //     // User is not logged in
-  //     this.router.navigate(['/guardian/parent-login']);
-  //   }
-  // }
 
   onSubmit() {
     if (this.childDataForm) {
