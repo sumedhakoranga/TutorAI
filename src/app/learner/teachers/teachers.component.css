@@ -10,7 +10,7 @@
   background-color: #d3bdcc;
 }
 
-.container {
+.head-container {
   max-width: 1140px;
   margin: auto;
   display: flex;
@@ -68,5 +68,16 @@
 
   100% {
     border-color: #007bff;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .profile-btn {
+    margin: 4px;
+    padding: 2px 7px;
+    border: 3px solid #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+    animation: borderFade 3s infinite linear;
   }
 }

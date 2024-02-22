@@ -24,6 +24,8 @@ export class AskaiComponent implements OnInit {
   @ViewChild('chatContainer') private chatContainer: ElementRef;
 
   messages: ChatMessage[] = [];
+  isLoadingResponse: boolean = false;
+
 
   ngOnInit() {
     const aiGreetingMessage: ChatMessage = {
@@ -61,6 +63,7 @@ export class AskaiComponent implements OnInit {
   }
 
   async simulateAIResponse(newMessage: string) {
+    this.isLoadingResponse = true;
     try {
       const db = getFirestore();
       const docRef = await addDoc(collection(db, "generate"), {
@@ -81,10 +84,13 @@ export class AskaiComponent implements OnInit {
             this.messages.push(aiMessage);
             console.log(this.messages);
           }, 1000);
+        } else {
+          this.isLoadingResponse = false;
         }
       });
     } catch (e) {
       console.error("Error adding document: ", e);
+      this.isLoadingResponse = false;
     }
   }
 }

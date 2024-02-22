@@ -1,6 +1,6 @@
 <div class="profile_component">
   <header class="profile-header">
-    <div class="container">
+    <div class="container head-container">
       <div class="profile-section">
         <img src="/assets/img/avatar.png" alt="Profile Image" class="profile-pic">
         <div class="user-info">
@@ -9,7 +9,10 @@
         </div>
       </div>
       <div class="user-actions">
-        <button class="profile-btn fa fa-bolt" routerLink="/profile">Exp</button>
+        <button class="profile-btn fa fa-bolt" routerLink="/profile">Exp: 1000</button>
+      </div>
+      <div class="user-actions">
+        <button class="profile-btn fa fa-bolt" routerLink="/learner/askai">Ask AI </button>
       </div>
     </div>
   </header>
@@ -22,15 +25,15 @@
             <section class="mt-4 text-center">
               <h5 class="">My Stuff</h5>
               <ul class="list-unstyled">
-                <li><a class="nav-link my-3 p-3" routerLink="/courses">Courses</a></li>
+                <li><a class="nav-link  pt-3" routerLink="/courses">Courses</a></li>
               </ul>
             </section>
             <section class="text-center">
               <h5>My Account</h5>
               <ul class="list-unstyled">
-                <li><a class="nav-link my-3 p-3" routerLink="/progress">Progress</a></li>
-                <li><a class="nav-link my-3 p-3" routerLink="/Profile">Profile</a></li>
-                <li><a class="nav-link my-3 p-3" routerLink="/teachers">Teachers</a></li>
+                <li><a class="nav-link pt-3" routerLink="/progress">Progress</a></li>
+                <li><a class="nav-link pt-3" routerLink="/Profile">Profile</a></li>
+                <li><a class="nav-link pt-3" routerLink="/teachers">Teachers</a></li>
               </ul>
             </section>
           </nav>
@@ -39,8 +42,8 @@
       </div>
 
       <div class="col-sm-12 col-md-10 dashboard">
-        <div class="container py-5">
-          <h1 class="badge-progress">🏆Badge Count🏆</h1>
+        <div class="container">
+          <h1 class="badge-progress mb-3">🏆Badge Count🏆</h1>
           <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col" *ngFor="let badge of badges">
               <div class="flip-card">
