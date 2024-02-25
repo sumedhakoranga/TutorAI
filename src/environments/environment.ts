@@ -25,10 +25,14 @@
 // const googleProvider = new GoogleAuthProvider();
 // const facebookProvider = new FacebookAuthProvider();
 
+const api_key = "API_KEY_NAME";
+
+console.info(api_key);
+
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "API_KEY_HERE",
+    apiKey: api_key,
     authDomain: "tutorai00411.firebaseapp.com",
     projectId: "tutorai00411",
     storageBucket: "tutorai00411.appspot.com",
