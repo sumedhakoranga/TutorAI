@@ -25,7 +25,6 @@
 // const googleProvider = new GoogleAuthProvider();
 // const facebookProvider = new FacebookAuthProvider();
 
-
 export const environment = {
   production: false,
   firebaseConfig: {
