@@ -1,4 +1,4 @@
-const api_key = "API_KEY_NAME";
+const api_key = "API_KEY_HERE";
 export const environment = {
   production: false,
   firebaseConfig: {
