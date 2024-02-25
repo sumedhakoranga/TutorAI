@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - run: perl -pi -e 's/API_KEY_HERE/$ENV{API_KEY}/g' src/environments/environment.ts
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
